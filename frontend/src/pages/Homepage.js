@@ -12,6 +12,7 @@ function Homepage() {
     <div class="container">
       <div class="col">
         <Header class="row"></Header>
+        <h1>hello Thanh chinh dau tien</h1>
         <span>.</span>
         <br />
         <span>.</span>

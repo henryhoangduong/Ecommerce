@@ -1,5 +1,5 @@
 import React from "react";
-import data from "D:/USER/React project/register-login/src/asset/data.json";
+import data from "../../asset/data.json";
 import { Link } from "react-router-dom";
 import Sidebar from "../../components/Sidebar";
 import Header from "../../components/Header";
