@@ -19,6 +19,11 @@ class ProductController extends Controller
         $products = Product::take(40)->get();
         return Response(['data'=>$products],200);
     }
+    public function pagination(Request $request){
+        $page= $request->input('page');
+        $products = Product::skip(($page-1)*10)->take(10)->get();
+        return Response(['data'=>$products],200);
+    }
     public function readbyid(Product $product){
         return Response(['data'=>$product],200);
     }

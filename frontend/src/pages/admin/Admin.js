@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import data from "D:/USER/React project/register-login/src/asset/data.json";
 import { Link } from "react-router-dom";
 import Sidebar from "../../components/Sidebar";
@@ -7,11 +7,15 @@ import'./Admin.css';
 import useFetch from "../../hook/useFetch";
 import Button from "react-bootstrap/Button";
 import Edit from "./Edit";
+import Pagination from "../../components/Pagination";
 
 function Admin() {
       const { loading, error, data } = useFetch(
-        "http://127.0.0.1:8000/api/read/products/1"
+        "http://127.0.0.1:8000/api/read/products/pagination?page=1"
       );
+  useEffect(() => {
+          console.log(data)
+        },[data])
       if (loading) return <p>loading</p>;
 
       if (error) return <p>error</p>;
@@ -33,36 +37,39 @@ function Admin() {
                 </tr>
               </thead>
               <tbody>
-                <tr key={data.id}>
-                  <th scope="row">
-                    <a href="#">
-                      <img
-                        class="img-fluid"
-                        style={{ width: "65px" }}
-                        src={data.image_url}
-                        alt=""
-                      />
-                    </a>
-                  </th>
-                  <td>
-                    <Link
-                      to={`/details/${data.id}`}
-                      class="text-primary fw-bold"
-                    >
-                      {data.name.substring(0, 70)}
-                    </Link>
-                  </td>
-                  <td>${data.price}</td>
-                  <td class="fw-bold">10</td>
-                  <td>
-                    <Edit></Edit>
-                  </td>
-                </tr>
+                {data.map((product) => (
+                  <tr key={product.id}>
+                    <th scope="row">
+                      <a href="#">
+                        <img
+                          class="img-fluid"
+                          style={{ width: "65px" }}
+                          src={product.image_url}
+                          alt=""
+                        />
+                      </a>
+                    </th>
+                    <td>
+                      <Link
+                        to={`/details/${product.id}`}
+                        class="text-primary fw-bold"
+                      >
+                        {product.name.substring(0, 70)}
+                      </Link>
+                    </td>
+                    <td>${product.price}</td>
+                    <td class="fw-bold">10</td>
+                    <td>
+                      <Edit></Edit>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
         </div>
       </div>
+      <Pagination></Pagination>
     </div>
   );
 }
