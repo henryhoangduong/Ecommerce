@@ -1,15 +1,16 @@
 import Login from "./pages/Login";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import "./asset/style.css";
+import { Routes, Route,  } from "react-router-dom";
 import ProductCard from "./components/Producttable";
 import Homepage from "./pages/Homepage";
 import Productdetail from "./pages/Productdetail";
 import Shoppingcarts from "./pages/Shoppingcarts";
+import Shoppingcarts_ from "./pages/Shoppingcarts_";
 import Admin from "./pages/admin/Admin";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { useAuth } from "./context/AuthContext";
 import UserRoute from "./util/UserRoute";
 import AdminRoute from "./util/AdminRoute";
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import "./asset/style.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (
@@ -23,7 +24,7 @@ function App() {
         <Route element={<UserRoute/>}>
           <Route
             path="shoppingcarts"
-            element={<Shoppingcarts></Shoppingcarts>}
+            element={<Shoppingcarts_></Shoppingcarts_>}
           ></Route>
         </Route>
         <Route element={<AdminRoute></AdminRoute>}>

@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom'
 import useFetch from '../hook/useFetch';
 import Header from '../components/Header';
 import Button from "react-bootstrap/Button";
+import Footer from '../components/Footer'
+import './Productdetail.css'
 
 function Productdetail() {
     const { id } = useParams();
@@ -42,7 +44,7 @@ function Productdetail() {
                   value="1"
                   style={{ width: "3rem" }}
                 />
-                <Button variant="outline-primary">
+                <Button id='addtocartbtn'>
                   <i class="bi-cart-fill me-1"></i>
                   Add to cart
                 </Button>
@@ -51,6 +53,7 @@ function Productdetail() {
           </div>
         </div>
       </section>
+      <Footer></Footer>
     </>
   );
 }
