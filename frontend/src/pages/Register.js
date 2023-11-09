@@ -7,8 +7,9 @@ import axios from "axios";
 // assets
 import "./Register.css";
 import registerImage from "../asset/img/registerImage.jpg";
-import { FcCheckmark } from "react-icons/fc";
+import { TbSquareRoundedCheckFilled } from "react-icons/tb";
 
+import Login from "./Login";
 //validated user name/must start with lowercase or upper letter/, password /1 lowercase, 1 uppercase, 1 diggit/
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[0-9]).{5,24}$/;
@@ -53,6 +54,7 @@ const Register = () => {
   // validate the password
   useEffect(() => {
     setValidPwd(PWD_REGEX.test(pwd));
+    console.log(pwd);
     setValidMatch(pwd === matchPwd);
   }, [pwd, matchPwd]);
 
@@ -60,31 +62,26 @@ const Register = () => {
     setErrMsg("");
   }, [user, pwd, matchPwd]);
 
-  useEffect(() => {
-    "use strict";
-
-    // DOM apply custom Bootstrap validation styles to
-    const forms = document.querySelectorAll(".validated-form");
-
-    // Loop over them and prevent submission
-    Array.from(forms).forEach((form) => {
-      form.addEventListener(
-        "submit",
-        (event) => {
-          if (!form.checkValidity()) {
-            event.preventDefault();
-            event.stopPropagation();
-          }
-
-          form.classList.add("was-validated");
-        },
-        false
-      );
-    });
-  }, []); // The empty dependency array [] ensures the code runs once when the component mounts.
-
+ 
+  async function handleSubmit(e){
+    e.preventDefault();
+    console.log("handle submit, username:",user," password: ",pwd);
+    setSuccess(true);
+  }
   return (
     <>
+      {success==true ? 
+      <section  >
+        <div   style={{height: '100vh'}} className="d-flex flex-row justify-content-center align-items-center route-register">
+        
+        <div className="shadow alert alert-success p-6 text-center fs-4" role="alert">Congratulation, You created your acount, let's check it out!<br/> <Login/>
+        
+        </div>
+
+        </div>
+
+      </section> :
+    
       <section >
         {/* //define what will hold the error when the error exist */}
         <p
@@ -95,7 +92,7 @@ const Register = () => {
           {errMsg}
         </p>
 
-        <div style={{height: '100vh'}} className="container-fluid justify-content-center d-flex align-items-center  route-register">
+        <div style={{height: '100vh'}} className="container-fluid justify-content-center d-flex align-items-center  route-register fs-5">
           <div className="row">
             <div className="col-md-6 offset-md-3 col-xl-4 offset-xl-4">
               <div className="card shadow">
@@ -105,19 +102,19 @@ const Register = () => {
                   style={{ "max-height": "800px" }}
                 />
                 <div className="card-body">
-                  <div className="card-title text-center my-0">
-                    Create your Lego account
+                  <div className="card-title text-center my-0 ">
+    
+                    <p className="fs-3 fw-bold font-monospace ">Create your Lego account</p>
                   </div>
-                  <form noValidate className="validated-form">
+                  <form  className="validated-form" onSubmit={handleSubmit}>
                     <div className="mb-3">
-                      <label htmlFor="username" className="form-label">
+                      <label for="validationServer03" htmlFor="username" className="form-label">
                         Email{" "}
-                        <FcCheckmark className={validName ? "valid" : "hide"} />
                       </label>
                       <input
-                        className="form-control"
+                        className={`form-control  ${validName ? "is-valid" : ""} ${!validName && user? "is-invalid" : ""}`}
                         type="text"
-                        ref={userRef} // allow us to set focus on input
+                        ref={userRef} // allow us to set focus on input, focus when combonent load
                         autoComplete="off" // don't want suggest value in this field
                         onChange={(e) => setUser(e.target.value)} // provide the event and set user stage, it tide the input to the user stage
                         aria-invalid={validName ? "false" : "true"}
@@ -129,27 +126,18 @@ const Register = () => {
                         onBlur={() => setUserFocus(false)}
                       />
                       {/* // uidnote match aria-describedby, if userfocus is on, user is already typed, and not the valid name */}
-                      <div
-                        id="uidnote"
-                        className={`${
-                          userFocus && user && !validName
-                            ? "instructions"
-                            : "offscreen"
-                        }  errmsg`}
-                      >
-                        4 to 24 characters. <br />Must begin with a letter. <br />Letters,
+
+                      <div id="uidnote" className="invalid-feedback">
+                        4 to 24 characters. Must begin with a letter. <br/>Letters,
                         numbers, underscores, hyphens allowed.
                       </div>
                     </div>
                     <div className="mb-3">
                       <label htmlFor="Password" className="form-label">
                         Password
-                        <FcCheckmark
-                          className={pwd && validPwd ? "valid" : "hide"}
-                        />
                       </label>
                       <input
-                        className="form-control"
+                        className={`form-control  ${pwd && validPwd ? "is-valid" : ""} ${!validPwd && pwd? "is-invalid" : ""}`}
                         type="password"
                         id="Password"
                         name="password"
@@ -162,10 +150,7 @@ const Register = () => {
                         required
                       />
                       <div
-                        id="pwdnote"
-                        className={`${
-                          pwdFocus && !validPwd && pwd ? "instructions" : "offscreen"
-                        } errmsg`}
+                        id="pwdnote" className="invalid-feedback"
                       >
                         5 to 24 characters.
                         <br />
@@ -176,12 +161,10 @@ const Register = () => {
                     <div className="mb-3">
                       <label htmlFor="ConfirmPassword" className="form-label">
                         Confirm Password
-                        <FcCheckmark
-                          className={matchPwd && validMatch ? "valid" : "hide"}
-                        />
+
                       </label>
                       <input
-                        className="form-control"
+                        className={`form-control  ${matchPwd && validMatch ? "is-valid" : ""} ${!validMatch && matchPwd? "is-invalid" : ""}` }
                         type="password"
                         id="ConfirmPassword"
                         name="confirmPassword"
@@ -193,18 +176,14 @@ const Register = () => {
                         required
                       />
                       <div
-                        id="confirmnote"
-                        className={`${
-                          matchFocus && !validMatch
-                            ? "instructions"
-                            : "offscreen"
-                        } errmsg`}
+                        id="confirmnote" className="invalid-feedback"
                       >
                         Not match the first password input field.
                       </div>
                     </div>
                     <div class="d-grid ">
                       <button
+                        disabled={!validName || !validPwd || !validMatch ? true : false}
                         type="submit"
                         className="btn btn-primary btn-block"
                       >
@@ -220,7 +199,7 @@ const Register = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section>}
     </>
   );
 };
