@@ -11,6 +11,7 @@ import AdminRoute from "./util/AdminRoute";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./asset/style.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Register from "./pages/Register";
 
 function App() {
   return (
@@ -27,6 +28,8 @@ function App() {
             element={<Shoppingcarts_></Shoppingcarts_>}
           ></Route>
         </Route>
+        <Route path="register" element={<Register></Register>}></Route>
+
         <Route element={<AdminRoute></AdminRoute>}>
           <Route path="admin" element={<Admin></Admin>}></Route>
         </Route>

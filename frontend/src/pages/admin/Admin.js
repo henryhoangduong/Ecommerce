@@ -1,6 +1,6 @@
 
 import React, { useEffect } from "react";
-import data from "D:/USER/React project/register-login/src/asset/data.json";
+// import data from "D:/USER/React project/register-login/src/asset/data.json";
 import RevenueCard from "../../components/RevenueCard";
 import Pagination from "../../components/Pagination";
 import Salescard from "../../components/Salescard";
