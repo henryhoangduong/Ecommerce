@@ -164,7 +164,7 @@ const Register = () => {
                       <div
                         id="pwdnote"
                         className={`${
-                          pwdFocus && !validPwd ? "instructions" : "offscreen"
+                          pwdFocus && !validPwd && pwd ? "instructions" : "offscreen"
                         } errmsg`}
                       >
                         5 to 24 characters.
