@@ -4,6 +4,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import data from "../asset/data.json";
 import useFetch from "../hook/useFetch";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 function Shoppingcarts() {
     const { loading, error, data } = useFetch(
       "http://127.0.0.1:8000/api/read/products"
@@ -86,6 +87,7 @@ function Shoppingcarts() {
         </div>
       </div>
       </section>
+      <Footer></Footer>
       </>
   );
 }

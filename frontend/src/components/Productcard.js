@@ -16,7 +16,7 @@ function Productcard() {
   return (
     <div class="row">
       {data.map((product) => (
-        <div key={product.id} class="col-sm-3">
+        <div key={product.id} class="col-sm-3" >
           <div class="card" style={{ width: "18rem" }}>
             <img class="card-img-top" src={product.image_url} alt="Card image cap" />
             <div class="card-body">
