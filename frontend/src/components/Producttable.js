@@ -1,6 +1,6 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-//import "./Productard.css";
+
 import { Link } from "react-router-dom";
 import data from "../asset/data.json";
 

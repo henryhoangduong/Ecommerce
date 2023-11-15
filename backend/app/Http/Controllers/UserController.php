@@ -44,35 +44,23 @@ class UserController extends Controller
         // return Response(['user' => $user], 200);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(User $user)
-    {
-        //
-    }
+    public function register(Request $request){
+        $input = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'password' => 'required',
+            'phone' => 'required',
+            'address' => 'required'
+        ]);
+    $user = new User;
+    $user->name = $input['name'];
+    $user->email = $input['email'];
+    $user->password = bcrypt($input['password']); // Hash the password for security
+    $user->phone = $input['phone'];
+    $user->address = $input['address'];
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(User $user)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, User $user)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(User $user)
-    {
-        //
+    // Save the user to the database
+    $user->save();
+    return Response(['message'=> $user],200);
     }
 }
