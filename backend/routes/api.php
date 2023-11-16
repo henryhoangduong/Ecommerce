@@ -33,6 +33,8 @@ Route::get('read/products/pagination', [App\Http\Controllers\ProductController::
 Route::get('read/products', [App\Http\Controllers\ProductController::class,'index']);
 Route::get('read/products/{product}', [App\Http\Controllers\ProductController::class,'readbyid']);
 
+Route::post('register',[App\Http\Controllers\UserController::class,'register']);
+
 
 Route::controller(ProductController::class)->group(function () {
     Route::post('create/products', 'create');

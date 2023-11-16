@@ -27,6 +27,7 @@ function Login() {
     }));
     console.log("USERRRR:",user)
   }
+
   async function handlelogin(event) {
     event.preventDefault();
     const url = "http://127.0.0.1:8000/api/login";

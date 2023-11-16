@@ -1,6 +1,6 @@
 
+
 import React, { useEffect } from "react";
-// import data from "D:/USER/React project/register-login/src/asset/data.json";
 import RevenueCard from "../../components/RevenueCard";
 import Pagination from "../../components/Pagination";
 import Salescard from "../../components/Salescard";
@@ -8,8 +8,10 @@ import Sidebar from "../../components/Sidebar";
 import Header from "../../components/Header";
 import Button from "react-bootstrap/Button";
 import useFetch from "../../hook/useFetch";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Edit from "./Edit";
+import Customercard from '../../components/Customercard'
 
 
 import'./Admin.css';
@@ -26,8 +28,12 @@ function Admin() {
   return (
     <div>
       <Header></Header>
-      <Salescard></Salescard>
-      <RevenueCard></RevenueCard>
+      <div id='card'>
+        <Salescard></Salescard>
+        <RevenueCard></RevenueCard>
+        <Customercard></Customercard>
+      </div>
+      
       <Sidebar></Sidebar>
       <div class="col-9" id="Producttable">
         <div class="card top-selling overflow-auto">
