@@ -11,9 +11,10 @@ import { TbSquareRoundedCheckFilled } from "react-icons/tb";
 
 import Login from "./Login";
 //validated user name/must start with lowercase or upper letter/, password /1 lowercase, 1 uppercase, 1 diggit/
-const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
+const USER_REGEX = /^[A-z ]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[0-9]).{5,24}$/;
-
+const EMAIL_REGEX = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+const PHONE_REGEX = /^(?:(?:\(?(?:00|\+)([1-4]\d\d|[1-9]\d?)\)?)?[\-\.\ \\\/]?)?((?:\(?\d{1,}\)?[\-\.\ \\\/]?){0,})(?:[\-\.\ \\\/]?(?:#|ext\.?|extension|x)[\-\.\ \\\/]?(\d+))?$/;
 const Register = () => {
   //allowed us to set the focus on the user input
   const userRef = useRef();
@@ -21,9 +22,17 @@ const Register = () => {
   const errRef = useRef();
 
   //state for user field, user'll type to user input, validName: whether the name validate or not, user input : whether we have focus on input field or not
+  const [email, setEmail] = useState("");
+  const [validEmail, setValidEmail] = useState(false);
+  const [emailFocus, setEmailFocus] = useState(false);
+
   const [user, setUser] = useState("");
   const [validName, setValidName] = useState(false);
   const [userFocus, setUserFocus] = useState(false);
+
+  const [phoneNmbr, setPhoneNmbr] = useState("");
+  const [validPhoneNmbr, setValidPhoneNmbr] = useState(false);
+  const [phoneNmbrFocus, setPhoneNmbrFocus] = useState(false);
 
   const [pwd, setPwd] = useState("");
   const [validPwd, setValidPwd] = useState(false);
@@ -36,6 +45,17 @@ const Register = () => {
   // errrMsg stage for posible error message, success, whether we success submit register form or not
   const [errMsg, setErrMsg] = useState("");
   const [success, setSuccess] = useState(false);
+
+  //set state for address select options
+  // const [addressNum,setAddressNum] = useState("");
+  const [adrssNum, setAdrssNum] = useState("");
+  const [city, setCity] = useState("");
+  const [district, setDistrict] = useState("");
+  const [ward, setWard] = useState("");
+
+  const [citiesField, setCitiesField] = useState([]);
+  const [districtsField, setDistrictsField] = useState([]);
+  const [wardsField, setWardsField] = useState([]);
 
   //apply for setting the focus when the component load
   useEffect(() => {
@@ -50,6 +70,22 @@ const Register = () => {
     setValidName(result);
   }, [user]); // anytime user change, it will check the validation of that field
 
+  useEffect(() => {
+    const result = EMAIL_REGEX.test(email);
+    // console.log(email);
+    // console.log(result);
+    setValidEmail(result);
+    console.log("register.js useEffect valid email: ", result);
+  }, [email]);
+
+  useEffect(() => {
+    const result = PHONE_REGEX.test(phoneNmbr);
+    // console.log(email);
+    // console.log(result);
+    setValidPhoneNmbr(result);
+    console.log("register.js useEffect setValidPhoneNmbr: ", result);
+  }, [phoneNmbr]);
+
   // validate the password
   useEffect(() => {
     setValidPwd(PWD_REGEX.test(pwd));
@@ -59,16 +95,49 @@ const Register = () => {
 
   useEffect(() => {
     setErrMsg("");
-  }, [user, pwd, matchPwd]);
+  }, [user, pwd, matchPwd, email]);
+
+  const handleCity = (data) => {
+    const filter = citiesField.filter((city) => city.name == data);
+    setDistrictsField(filter[0].districts);
+    setCity(data);
+    // console.log("Register.js handleDistrict : ", filter[0].Districts);
+  };
+  const handleDistrict = (data) => {
+    const filter = districtsField.filter((district) => district.name == data);
+    setWardsField(filter[0].wards);
+    setDistrict(data);
+  };
+
+  useEffect(() => {
+    var Parameter = {
+      url: "https://provinces.open-api.vn/api/?depth=3",
+      method: "GET",
+      responseType: "application/json",
+    };
+    var promise = axios(Parameter);
+    promise.then(function (result) {
+      const data = JSON.parse(result.data);
+      // renderAddress(data);
+      setCitiesField(data);
+      // console.log("Register.js promise setCities: ",data);
+    });
+  }, []);
 
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      const REGISTER_URL = "http://127.0.0.1:8000/api/register";
-      const userInput = { name: user, password: pwd };
-      // console.log("user input",userInput);
-      const res = await axios.post(REGISTER_URL, userInput);
-      console.log(res);
+      // const REGISTER_URL = "http://127.0.0.1:8000/api/register";
+      const userInput = {
+        name: user,
+        email: email,
+        phone:phoneNmbr,
+        password: pwd,
+        address: `${adrssNum}, ${ward}, ${district}, ${city}`,
+      };
+      console.log("user input", userInput);
+      // const res = await axios.post(REGISTER_URL, userInput);
+      // console.log(res);
       setSuccess(true);
       //clear state and controlled inputs
       //need value attrib on inputs for this
@@ -85,6 +154,7 @@ const Register = () => {
       }
     }
   }
+
   return (
     <>
       {success == true ? (
@@ -117,8 +187,6 @@ const Register = () => {
         </section>
       ) : (
         <section>
-
-
           <div
             style={{ height: "100vh" }}
             className="container-fluid justify-content-center d-flex align-items-center  route-register fs-5"
@@ -131,15 +199,17 @@ const Register = () => {
                     className="card-img-top"
                     style={{ "max-height": "800px" }}
                   />
-                            {/* //define what will hold the error when the error exist */}
-          <p
-            ref={errRef}
-            className={`${errMsg ? "alert alert-danger" : "offscreen"} text-center`}
-            role="alert"
-            aria-live="assertive"
-          >
-            {errMsg}
-          </p>
+                  {/* //define what will hold the error when the error exist */}
+                  <p
+                    ref={errRef}
+                    className={`${
+                      errMsg ? "alert alert-danger" : "offscreen"
+                    } text-center`}
+                    role="alert"
+                    aria-live="assertive"
+                  >
+                    {errMsg}
+                  </p>
                   <div className="card-body">
                     <div className="card-title text-center my-0 ">
                       <p className="fs-3 fw-bold font-monospace ">
@@ -153,7 +223,7 @@ const Register = () => {
                           htmlFor="username"
                           className="form-label"
                         >
-                          Email{" "}
+                          Name{" "}
                         </label>
                         <input
                           className={`form-control  ${
@@ -178,6 +248,138 @@ const Register = () => {
                           Letters, numbers, underscores, hyphens allowed.
                         </div>
                       </div>
+                      <div className="mb-3">
+                        <label
+                          for="email"
+                          htmlFor="email"
+                          className="form-label"
+                        >
+                          Email{" "}
+                        </label>
+                        <input
+                          className={`form-control  ${
+                            validEmail ? "is-valid" : ""
+                          } ${!validEmail && email ? "is-invalid" : ""}`}
+                          type="text"
+                          onChange={(e) => setEmail(e.target.value)} // provide the event and set user stage, it tide the input to the user stage
+                          aria-invalid={validEmail ? "false" : "true"}
+                          id="email"
+                          name="email"
+                          required
+                          aria-describedby="uidnote"
+                          onFocus={() => setEmailFocus(true)} //if the user field is focus we setting it to true
+                          onBlur={() => setEmailFocus(false)}
+                        />
+                        {/* // uidnote match aria-describedby, if userfocus is on, user is already typed, and not the valid name */}
+
+                        <div id="uidnote" className="invalid-feedback">
+                          email not right!
+                        </div>
+                      </div>
+
+                      {/* address input start--- */}
+                      <div className="mb-3">
+                        <label
+                          for="phoneNmbr"
+                          htmlFor="phoneNmbr"
+                          className="form-label"
+                        >
+                          phone number{" "}
+                        </label>
+
+                        <input
+                          className={`form-control  ${
+                            phoneNmbr && validPhoneNmbr ? "is-valid" : ""
+                          } ${
+                            !validPhoneNmbr && phoneNmbr ? "is-invalid" : ""
+                          }`}
+                          type="tel"
+                          onChange={(e) => setPhoneNmbr(e.target.value)} // provide the event and set user stage, it tide the input to the user stage
+                          aria-invalid={validPhoneNmbr ? "false" : "true"}
+                          id="phoneNmbr"
+                          name="phoneNmbr"
+                          value={phoneNmbr}
+                          placeholder="Enter a phone number"
+                          required
+                          aria-describedby="phone"
+                          onFocus={() => setPhoneNmbrFocus(true)} //if the user field is focus we setting it to true
+                          onBlur={() => setPhoneNmbrFocus(false)}
+                        />
+                        {/* // uidnote match aria-describedby, if userfocus is on, user is already typed, and not the valid name */}
+
+                        <div id="phone" className="invalid-feedback">
+                          not valid yet!
+                        </div>
+                      </div>
+                      <p>
+                        <input
+                          class="box"
+                          type="text"
+                          name="adrss"
+                          placeholder="Enter your address"
+                          required
+                          onChange={(e) => setAdrssNum(e.target.value)}
+                        />
+                      </p>
+                      <select
+                        name="city"
+                        id="city"
+                        class="box"
+                        required
+                        onChange={(e) => handleCity(e.target.value)}
+                      >
+                        <option value="" disabled selected>
+                          Select Tỉnh/Thành
+                        </option>
+                        {citiesField.map((city) => (
+                          <option key={city.code} value={`${city.name}`}>
+                            {city.name}
+                          </option>
+                        ))}
+
+                        {/* <!-- Add Tỉnh/Thành options here --> */}
+                      </select>
+
+                      <select
+                        name="district"
+                        id="district"
+                        class="box"
+                        required
+                        onChange={(e) => handleDistrict(e.target.value)}
+                      >
+                        <option value="" disabled selected>
+                          Select Quận/Huyện
+                        </option>
+                        {districtsField.map((district) => (
+                          <option
+                            key={district.code}
+                            value={`${district.name}`}
+                          >
+                            {district.name}
+                          </option>
+                        ))}
+                        {/* <!-- Add Quận/Huyện options here --> */}
+                      </select>
+
+                      <select
+                        name="ward"
+                        id="ward"
+                        class="box"
+                        required
+                        onChange={(e) => setWard(e.target.value)}
+                      >
+                        <option value="" disabled selected>
+                          Select Phường/Xã
+                        </option>
+                        {wardsField.map((ward) => (
+                          <option key={ward.code} value={`${ward.name}`}>
+                            {ward.name}
+                          </option>
+                        ))}
+                        {/* <!-- Add Thị Xã options here --> */}
+                      </select>
+                      {/* address input end--- */}
+
                       <div className="mb-3">
                         <label htmlFor="Password" className="form-label">
                           Password
