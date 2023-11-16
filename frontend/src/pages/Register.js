@@ -14,7 +14,8 @@ import Login from "./Login";
 const USER_REGEX = /^[A-z ]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[0-9]).{5,24}$/;
 const EMAIL_REGEX = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
-const PHONE_REGEX = /^(?:(?:\(?(?:00|\+)([1-4]\d\d|[1-9]\d?)\)?)?[\-\.\ \\\/]?)?((?:\(?\d{1,}\)?[\-\.\ \\\/]?){0,})(?:[\-\.\ \\\/]?(?:#|ext\.?|extension|x)[\-\.\ \\\/]?(\d+))?$/;
+const PHONE_REGEX =
+  /^(?:(?:\(?(?:00|\+)([1-4]\d\d|[1-9]\d?)\)?)?[\-\.\ \\\/]?)?((?:\(?\d{1,}\)?[\-\.\ \\\/]?){0,})(?:[\-\.\ \\\/]?(?:#|ext\.?|extension|x)[\-\.\ \\\/]?(\d+))?$/;
 const Register = () => {
   //allowed us to set the focus on the user input
   const userRef = useRef();
@@ -131,7 +132,7 @@ const Register = () => {
       const userInput = {
         name: user,
         email: email,
-        phone:phoneNmbr,
+        phone: phoneNmbr,
         password: pwd,
         address: `${adrssNum}, ${ward}, ${district}, ${city}`,
       };
@@ -189,10 +190,10 @@ const Register = () => {
         <section>
           <div
             style={{ height: "100vh" }}
-            className="container-fluid justify-content-center d-flex align-items-center  route-register fs-5"
+            className="container-fluid justify-content-center d-flex align-items-center  route-register fs-7"
           >
             <div className="row">
-              <div className="col-md-6 offset-md-3 col-xl-4 offset-xl-4">
+              <div className="col-md-6 offset-md-3 col-xl-6 offset-xl-3">
                 <div className="card shadow">
                   <img
                     src={registerImage}
@@ -211,223 +212,289 @@ const Register = () => {
                     {errMsg}
                   </p>
                   <div className="card-body">
-                    <div className="card-title text-center my-0 ">
-                      <p className="fs-3 fw-bold font-monospace ">
-                        Create your Lego account
-                      </p>
-                    </div>
+                      <div className="card-title text-center my-0 p-0">
+                        <p className="fs-3 fw-bold font-monospace ">
+                          Create your Lego account
+                        </p>
+                      </div>
+
                     <form className="validated-form" onSubmit={handleSubmit}>
-                      <div className="mb-3">
-                        <label
-                          for="validationServer03"
-                          htmlFor="username"
-                          className="form-label"
-                        >
-                          Name{" "}
-                        </label>
-                        <input
-                          className={`form-control  ${
+                      <div class={"input-group has-validation mb-3"}>
+                        <div
+                          className={`form-floating  ${
                             validName ? "is-valid" : ""
                           } ${!validName && user ? "is-invalid" : ""}`}
-                          type="text"
-                          ref={userRef} // allow us to set focus on input, focus when combonent load
-                          autoComplete="off" // don't want suggest value in this field
-                          onChange={(e) => setUser(e.target.value)} // provide the event and set user stage, it tide the input to the user stage
-                          aria-invalid={validName ? "false" : "true"}
-                          id="username"
-                          name="username"
-                          required
-                          aria-describedby="uidnote"
-                          onFocus={() => setUserFocus(true)} //if the user field is focus we setting it to true
-                          onBlur={() => setUserFocus(false)}
-                        />
-                        {/* // uidnote match aria-describedby, if userfocus is on, user is already typed, and not the valid name */}
-
-                        <div id="uidnote" className="invalid-feedback">
+                        >
+                          <input
+                            className={`form-control ${
+                              validName ? "is-valid" : ""
+                            } ${!validName && user ? "is-invalid" : ""}`}
+                            type="text"
+                            ref={userRef} // allow us to set focus on input, focus when combonent load
+                            autoComplete="off" // don't want suggest value in this field
+                            onChange={(e) => setUser(e.target.value)} // provide the event and set user stage, it tide the input to the user stage
+                            aria-invalid={validName ? "false" : "true"}
+                            id="username"
+                            name="username"
+                            placeholder="Enter your name"
+                            required
+                            aria-describedby="name"
+                            onFocus={() => setUserFocus(true)} //if the user field is focus we setting it to true
+                            onBlur={() => setUserFocus(false)}
+                          />
+                          {/* // uidnote match aria-describedby, if userfocus is on, user is already typed, and not the valid name */}
+                          <label htmlFor="username">Name </label>
+                        </div>
+                        <div id="name" className="invalid-feedback">
                           4 to 24 characters. Must begin with a letter. <br />
                           Letters, numbers, underscores, hyphens allowed.
                         </div>
                       </div>
-                      <div className="mb-3">
-                        <label
-                          for="email"
-                          htmlFor="email"
-                          className="form-label"
-                        >
-                          Email{" "}
-                        </label>
-                        <input
-                          className={`form-control  ${
-                            validEmail ? "is-valid" : ""
-                          } ${!validEmail && email ? "is-invalid" : ""}`}
-                          type="text"
-                          onChange={(e) => setEmail(e.target.value)} // provide the event and set user stage, it tide the input to the user stage
-                          aria-invalid={validEmail ? "false" : "true"}
-                          id="email"
-                          name="email"
-                          required
-                          aria-describedby="uidnote"
-                          onFocus={() => setEmailFocus(true)} //if the user field is focus we setting it to true
-                          onBlur={() => setEmailFocus(false)}
-                        />
-                        {/* // uidnote match aria-describedby, if userfocus is on, user is already typed, and not the valid name */}
-
-                        <div id="uidnote" className="invalid-feedback">
-                          email not right!
+                      <div className="row g-2">
+                        <div className={"col-sm-8"}>
+                          <div class={"input-group has-validation mb-3"}>
+                            <div
+                              className={`form-floating ${
+                                validEmail ? "is-valid" : ""
+                              } ${!validEmail && email ? "is-invalid" : ""}`}
+                            >
+                              <input
+                                className={`form-control  ${
+                                  validEmail ? "is-valid" : ""
+                                } ${!validEmail && email ? "is-invalid" : ""}`}
+                                type="text"
+                                onChange={(e) => setEmail(e.target.value)} // provide the event and set user stage, it tide the input to the user stage
+                                aria-invalid={validEmail ? "false" : "true"}
+                                id="email"
+                                name="email"
+                                required
+                                placeholder="Enter your email"
+                                aria-describedby="uidnote"
+                                onFocus={() => setEmailFocus(true)} //if the user field is focus we setting it to true
+                                onBlur={() => setEmailFocus(false)}
+                              />
+                              {/* // uidnote match aria-describedby, if userfocus is on, user is already typed, and not the valid name */}
+                              <label
+                                for="email"
+                                htmlFor="email"
+                                className="form-label"
+                              >
+                                Email{" "}
+                              </label>
+                              <div id="uidnote" className="invalid-feedback">
+                                email not right!
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div className={"col-sm-4"}>
+                          <div class={"input-group has-validation mb-3"}>
+                            <div
+                              className={`form-floating ${
+                                phoneNmbr && validPhoneNmbr ? "is-valid" : ""
+                              } ${
+                                !validPhoneNmbr && phoneNmbr ? "is-invalid" : ""
+                              }`}
+                            >
+                              <input
+                                className={`form-control  ${
+                                  phoneNmbr && validPhoneNmbr ? "is-valid" : ""
+                                } ${
+                                  !validPhoneNmbr && phoneNmbr
+                                    ? "is-invalid"
+                                    : ""
+                                }`}
+                                type="tel"
+                                onChange={(e) => setPhoneNmbr(e.target.value)} // provide the event and set user stage, it tide the input to the user stage
+                                aria-invalid={validPhoneNmbr ? "false" : "true"}
+                                id="phoneNmbr"
+                                name="phoneNmbr"
+                                value={phoneNmbr}
+                                placeholder="Enter a phone number"
+                                required
+                                aria-describedby="phone"
+                                onFocus={() => setPhoneNmbrFocus(true)} //if the user field is focus we setting it to true
+                                onBlur={() => setPhoneNmbrFocus(false)}
+                              />
+                              {/* // uidnote match aria-describedby, if userfocus is on, user is already typed, and not the valid name */}
+                              <label
+                                for="phoneNmbr"
+                                htmlFor="phoneNmbr"
+                                className="form-label"
+                              >
+                                Phone number{" "}
+                              </label>
+                              <div id="phone" className="invalid-feedback">
+                                not valid yet!
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       </div>
 
                       {/* address input start--- */}
-                      <div className="mb-3">
-                        <label
-                          for="phoneNmbr"
-                          htmlFor="phoneNmbr"
-                          className="form-label"
-                        >
-                          phone number{" "}
-                        </label>
 
-                        <input
-                          className={`form-control  ${
-                            phoneNmbr && validPhoneNmbr ? "is-valid" : ""
-                          } ${
-                            !validPhoneNmbr && phoneNmbr ? "is-invalid" : ""
-                          }`}
-                          type="tel"
-                          onChange={(e) => setPhoneNmbr(e.target.value)} // provide the event and set user stage, it tide the input to the user stage
-                          aria-invalid={validPhoneNmbr ? "false" : "true"}
-                          id="phoneNmbr"
-                          name="phoneNmbr"
-                          value={phoneNmbr}
-                          placeholder="Enter a phone number"
-                          required
-                          aria-describedby="phone"
-                          onFocus={() => setPhoneNmbrFocus(true)} //if the user field is focus we setting it to true
-                          onBlur={() => setPhoneNmbrFocus(false)}
-                        />
-                        {/* // uidnote match aria-describedby, if userfocus is on, user is already typed, and not the valid name */}
+                      <div class={"input-group has-validation mb-3"}>
+                        <div className={`form-floating`}>
+                          <input
+                            className={"form-control"}
+                            type="text"
+                            name="adrss"
+                            placeholder="Enter your address"
+                            required
+                            id="address"
+                            onChange={(e) => setAdrssNum(e.target.value)}
+                          />
 
-                        <div id="phone" className="invalid-feedback">
-                          not valid yet!
+                          <label
+                            for="address"
+                            htmlFor="address"
+                            className="form-label"
+                          >
+                            Address{" "}
+                          </label>
                         </div>
                       </div>
-                      <p>
-                        <input
-                          class="box"
-                          type="text"
-                          name="adrss"
-                          placeholder="Enter your address"
-                          required
-                          onChange={(e) => setAdrssNum(e.target.value)}
-                        />
-                      </p>
-                      <select
-                        name="city"
-                        id="city"
-                        class="box"
-                        required
-                        onChange={(e) => handleCity(e.target.value)}
-                      >
-                        <option value="" disabled selected>
-                          Select Tỉnh/Thành
-                        </option>
-                        {citiesField.map((city) => (
-                          <option key={city.code} value={`${city.name}`}>
-                            {city.name}
-                          </option>
-                        ))}
+                      <div className="row g-2 mb-3">
+                        <div className="col-sm-4">
+                          <div className="form-floating">
+                            <select
+                              name="city"
+                              className={"form-select"}
+                              id="city"
+                              required
+                              onChange={(e) => handleCity(e.target.value)}
+                            >
+                              <option value="" disabled selected>
+                                Select Tỉnh/Thành
+                              </option>
+                              {citiesField.map((city) => (
+                                <option key={city.code} value={`${city.name}`}>
+                                  {city.name}
+                                </option>
+                              ))}
 
-                        {/* <!-- Add Tỉnh/Thành options here --> */}
-                      </select>
+                              {/* <!-- Add Tỉnh/Thành options here --> */}
+                            </select>
+                            <label htmlFor="city">City/Province</label>
+                          </div>
+                        </div>
+                        <div className="col-sm-4">
+                          <div className="form-floating">
+                            <select
+                              name="district"
+                              className={"form-select"}
+                              id="district"
+                              required
+                              onChange={(e) => handleDistrict(e.target.value)}
+                            >
+                              <option value="" disabled selected>
+                                Select Quận/Huyện
+                              </option>
+                              {districtsField.map((district) => (
+                                <option
+                                  key={district.code}
+                                  value={`${district.name}`}
+                                >
+                                  {district.name}
+                                </option>
+                              ))}
+                              {/* <!-- Add Quận/Huyện options here --> */}
+                            </select>
+                            <label htmlFor="district">district</label>
+                          </div>
+                        </div>
+                        <div className="col-sm-4">
+                          <div className="form-floating">
+                            <select
+                              name="ward"
+                              id="ward"
+                              className={"form-select"}
+                              required
+                              onChange={(e) => setWard(e.target.value)}
+                            >
+                              <option value="" disabled selected>
+                                Select Phường/Xã
+                              </option>
+                              {wardsField.map((ward) => (
+                                <option key={ward.code} value={`${ward.name}`}>
+                                  {ward.name}
+                                </option>
+                              ))}
+                              {/* <!-- Add Thị Xã options here --> */}
+                            </select>
+                            <label htmlFor="ward">ward</label>
+                          </div>
+                        </div>
+                      </div>
 
-                      <select
-                        name="district"
-                        id="district"
-                        class="box"
-                        required
-                        onChange={(e) => handleDistrict(e.target.value)}
-                      >
-                        <option value="" disabled selected>
-                          Select Quận/Huyện
-                        </option>
-                        {districtsField.map((district) => (
-                          <option
-                            key={district.code}
-                            value={`${district.name}`}
-                          >
-                            {district.name}
-                          </option>
-                        ))}
-                        {/* <!-- Add Quận/Huyện options here --> */}
-                      </select>
-
-                      <select
-                        name="ward"
-                        id="ward"
-                        class="box"
-                        required
-                        onChange={(e) => setWard(e.target.value)}
-                      >
-                        <option value="" disabled selected>
-                          Select Phường/Xã
-                        </option>
-                        {wardsField.map((ward) => (
-                          <option key={ward.code} value={`${ward.name}`}>
-                            {ward.name}
-                          </option>
-                        ))}
-                        {/* <!-- Add Thị Xã options here --> */}
-                      </select>
                       {/* address input end--- */}
-
-                      <div className="mb-3">
-                        <label htmlFor="Password" className="form-label">
-                          Password
-                        </label>
-                        <input
-                          className={`form-control  ${
+                      <div class={"input-group has-validation mb-3"}>
+                        <div
+                          className={`form-floating ${
                             pwd && validPwd ? "is-valid" : ""
                           } ${!validPwd && pwd ? "is-invalid" : ""}`}
-                          type="password"
-                          id="Password"
-                          name="password"
-                          value={pwd}
-                          onChange={(e) => setPwd(e.target.value)}
-                          aria-invalid={validPwd ? "false" : "true"}
-                          aria-describedby="pwdnote"
-                          onFocus={() => setPwdFocus(true)}
-                          onBlur={() => setPwdFocus(false)}
-                          required
-                        />
-                        <div id="pwdnote" className="invalid-feedback">
+                        >
+                          <input
+                            className={`form-control  ${
+                              pwd && validPwd ? "is-valid" : ""
+                            } ${!validPwd && pwd ? "is-invalid" : ""}`}
+                            type="password"
+                            onChange={(e) => setPwd(e.target.value)}
+                            aria-invalid={validPwd ? "false" : "true"}
+                            id="password"
+                            name="password"
+                            value={pwd}
+                            required
+                            placeholder="Enter your password"
+                            aria-describedby="pwd"
+                            onFocus={() => setPwdFocus(true)}
+                            onBlur={() => setPwdFocus(false)}
+                          />
+                          <label htmlFor="password">Password</label>
+                        </div>
+                        <div id="pwd" className="invalid-feedback">
                           5 to 24 characters.
                           <br />
                           include letters and a number <br />
                         </div>
                       </div>
 
-                      <div className="mb-3">
-                        <label htmlFor="ConfirmPassword" className="form-label">
-                          Confirm Password
-                        </label>
-                        <input
-                          className={`form-control  ${
+                      <div class={"input-group has-validation mb-3"}>
+                        <div
+                          className={`form-floating ${
                             matchPwd && validMatch ? "is-valid" : ""
                           } ${!validMatch && matchPwd ? "is-invalid" : ""}`}
-                          type="password"
-                          id="ConfirmPassword"
-                          name="confirmPassword"
-                          aria-describedby="confirmnote"
-                          aria-invalid={validMatch ? "false" : "true"}
-                          onChange={(e) => setMatchPwd(e.target.value)}
-                          onFocus={() => setMatchFocus(true)}
-                          onBlur={() => setMatchFocus(false)}
-                          required
-                        />
-                        <div id="confirmnote" className="invalid-feedback">
-                          Not match the first password input field.
+                        >
+                          <input
+                            className={`form-control  ${
+                              matchPwd && validMatch ? "is-valid" : ""
+                            } ${!validMatch && matchPwd ? "is-invalid" : ""}`}
+                            type="password"
+                            id="ConfirmPassword"
+                            name="confirmPassword"
+                            aria-describedby="confirmnote"
+                            aria-invalid={validMatch ? "false" : "true"}
+                            onChange={(e) => setMatchPwd(e.target.value)}
+                            onFocus={() => setMatchFocus(true)}
+                            onBlur={() => setMatchFocus(false)}
+                            required
+                            placeholder="Enter your comfirm password"
+                          />
+                          {/* // uidnote match aria-describedby, if userfocus is on, user is already typed, and not the valid name */}
+                          <label
+                            for="ConfirmPassword"
+                            htmlFor="ConfirmPassword"
+                            className="form-label"
+                          >
+                            Confirm Password
+                          </label>
+                          <div id="confirmnote" className="invalid-feedback">
+                            Not match the first password input field.
+                          </div>
                         </div>
                       </div>
+
                       <div class="d-grid ">
                         <button
                           disabled={
