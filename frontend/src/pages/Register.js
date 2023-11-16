@@ -160,9 +160,31 @@ const Register = () => {
     <>
       {success == true ? (
         <section>
+          <div className="background">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
           <div
             style={{ height: "100vh" }}
-            className="container-fluid justify-content-center d-flex align-items-center  route-register fs-5"
+            className="container-fluid justify-content-center d-flex align-items-center  fs-5"
           >
             <div className="row">
               <div className="col-md-6 offset-md-3 col-xl-4 offset-xl-4">
@@ -188,18 +210,35 @@ const Register = () => {
         </section>
       ) : (
         <section>
+          <div className="background">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
           <div
-            style={{ height: "100vh" }}
-            className="container-fluid justify-content-center d-flex align-items-center  route-register fs-7"
+            style={{ height: "100vh"}}
+            className="container-fluid justify-content-center d-flex align-items-center  fs-6"
           >
-            <div className="row">
-              <div className="col-md-6 offset-md-3 col-xl-6 offset-xl-3">
+            <div className="row w-100 " >
+              <div className="col-lg-6 offset-lg-3" >
                 <div className="card shadow">
-                  <img
-                    src={registerImage}
-                    className="card-img-top"
-                    style={{ "max-height": "800px" }}
-                  />
                   {/* //define what will hold the error when the error exist */}
                   <p
                     ref={errRef}
@@ -212,11 +251,11 @@ const Register = () => {
                     {errMsg}
                   </p>
                   <div className="card-body">
-                      <div className="card-title text-center my-0 p-0">
-                        <p className="fs-3 fw-bold font-monospace ">
-                          Create your Lego account
-                        </p>
-                      </div>
+                    <div className="card-title text-center my-0 ">
+                      <p className="fs-3 fw-bold font-monospace ">
+                        Create your Lego account
+                      </p>
+                    </div>
 
                     <form className="validated-form" onSubmit={handleSubmit}>
                       <div class={"input-group has-validation mb-3"}>
