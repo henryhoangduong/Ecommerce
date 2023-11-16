@@ -6,6 +6,8 @@ import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import Login from "../pages/Login";
 import axios from "axios";
+import { Button } from "reactstrap";
+import ReactButton from "react-bootstrap/Button"
 
 
 function Header() {
@@ -92,6 +94,15 @@ function Header() {
                 </Link>
               ) : (
                 <Login></Login>
+              )}
+            </li>
+            <li>
+              {isLoggedIn ? (
+                <Link to={`/`} onClick={handleLogout} class="nav-link nav-icon">
+                  <span>Log out</span>
+                </Link>
+              ) : (
+                <ReactButton href="/register">Register</ReactButton>
               )}
             </li>
           </ul>

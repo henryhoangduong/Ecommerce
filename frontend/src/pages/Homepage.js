@@ -10,9 +10,11 @@ import Footer from "../components/Footer";
 
 function Homepage() {
   return (
+
     <>
       <div
         class="bg-image">
+
       </div>
       <div class="container">
         <div class="col">

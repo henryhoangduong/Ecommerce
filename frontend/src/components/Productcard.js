@@ -4,6 +4,8 @@ import data from "../asset/data.json";
 import axios from "axios";
 import useFetch from "../hook/useFetch";
 
+
+
 function Productcard() {
   const { loading, error, data } = useFetch(
     "http://127.0.0.1:8000/api/read/products"
