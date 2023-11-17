@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -20,24 +21,25 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('login', [App\Http\Controllers\UserController::class,'login']);
 
+Route::post('login', [App\Http\Controllers\UserController::class,'login']);
+Route::post('register',[App\Http\Controllers\UserController::class,'register']);
 
 Route::controller(UserController::class)->group(function () {
     Route::get('logout', 'logout');
-    
 })->middleware('auth:api');
-
 
 Route::get('read/products/pagination', [App\Http\Controllers\ProductController::class,'pagination']);
 Route::get('read/products', [App\Http\Controllers\ProductController::class,'index']);
 Route::get('read/products/{product}', [App\Http\Controllers\ProductController::class,'readbyid']);
 
-Route::post('register',[App\Http\Controllers\UserController::class,'register']);
-
-
 Route::controller(ProductController::class)->group(function () {
     Route::post('create/products', 'create');
     Route::post('update/products/{product}', [App\Http\Controllers\ProductController::class,'update']);
     Route::delete('delete/products{product}', [App\Http\Controllers\ProductController::class,'destroy']);
+})->middleware('auth:api');
+
+
+Route::controller(OrderController::class)->group(function () {
+    Route::post('order', 'index');
 })->middleware('auth:api');
