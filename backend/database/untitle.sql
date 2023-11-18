@@ -60,6 +60,7 @@ create table Carts(
 	id int primary key not null auto_increment,
     user_id int,
     product_id int,
+    quantities int,
     foreign key (product_id) references Products(id),
     foreign key (user_id) references Users(id)
-)
+);
