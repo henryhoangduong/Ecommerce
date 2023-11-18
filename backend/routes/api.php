@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 
 
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -24,6 +25,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 //User controller
 Route::post('login', [App\Http\Controllers\UserController::class,'login']);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 26a72f3503552a66f0ecccb29eecebf72d273770
 Route::controller(UserController::class)->group(function () {
     Route::get('logout', 'logout');
 })->middleware('auth:api');

@@ -25,7 +25,7 @@ function Login() {
       ...current,
       [event.target.name]: event.target.value,
     }));
-    console.log(user)
+    console.log("USERRRR:",user)
   }
 
   async function handlelogin(event) {
