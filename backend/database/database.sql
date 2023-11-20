@@ -61,13 +61,16 @@ create table Carts(
     user_id int,
     product_id int,
     quantities int,
+    is_ordered boolean default false,
     foreign key (product_id) references Products(id),
     foreign key (user_id) references Users(id)
 );
 
+ALTER TABLE Carts
+ADD is_ordered boolean;
+
 Insert into Carts values (1,1,1,10);
 Insert into Carts values(2,1,2,10);
-select * from users;
 
 SELECT
     Carts.id AS cart_id,
