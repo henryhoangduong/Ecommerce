@@ -6,7 +6,7 @@ import Footer from '../components/Footer';
 function Shoppingcarts_() {
 
     const { loading, error, data } = useFetch(
-      "http://127.0.0.1:8000/api/read/products"
+      "http://127.0.0.1:8000/api/read/carts"
     );
     if (loading) return <p>loading</p>;
 
