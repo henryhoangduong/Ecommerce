@@ -24,11 +24,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 //User controller
-Route::post('login', [App\Http\Controllers\UserController::class,'login']);
-<<<<<<< HEAD
-=======
+Route::post('login', [App\Http\Controllers\UserController::class, 'login']);
 
->>>>>>> 26a72f3503552a66f0ecccb29eecebf72d273770
+
 Route::controller(UserController::class)->group(function () {
     Route::get('logout', 'logout');
 })->middleware('auth:api');
@@ -50,3 +48,6 @@ Route::controller(Cartcontroller::class)->group(function () {
     Route::post('create/carts', 'index');
     Route::post('update/carts/{carts}', 'updateQuantities');
 })->middleware('auth:api');
+
+//Order controller
+Route::post('create/orders', [App\Http\Controllers\OrderController::class, 'index'])->middleware('auth:api');
