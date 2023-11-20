@@ -66,6 +66,7 @@ create table Carts(
 );
 
 Insert into Carts values (1,1,1,10);
+Insert into Carts values(2,1,2,10);
 select * from users;
 
 SELECT

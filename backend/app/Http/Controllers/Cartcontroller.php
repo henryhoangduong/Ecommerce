@@ -17,10 +17,10 @@ class Cartcontroller extends Controller
     public function index()
     {
         $cart =DB::table('Carts')
-                ->select('Carts.id as cart_id', 'Products.name', 'Users.name')
+                ->select('Carts.id as cart_id','Products.id', 'Products.name', 'Products.image_url','Products.price')
                 ->join('Products', 'Carts.product_id', '=', 'Products.id')
                 ->join('Users', 'Carts.user_id', '=', 'Users.id')
-                ->where('Carts.id', 1)->first();
+                ->where('user_id', 1)->get();
         return Response(['data' => $cart], 200);
     }
 
