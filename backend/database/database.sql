@@ -81,3 +81,8 @@ JOIN
     Users ON Carts.user_id = Users.id
 WHERE
     Carts.id = 1;
+
+/*Admin lấy lịch sử danh sách của order*/
+SELECT *
+FROM Orders
+ORDER BY order_date DESC;
