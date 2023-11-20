@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 class OrderController extends Controller
 {
     public function index(Request $request){
+
         $user_id = Auth::guard('api')->user()->id;
     }
 }
