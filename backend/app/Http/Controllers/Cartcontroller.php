@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Carts;
+use App\Models\Orders;
 use Illuminate\Http\Request;
 use GuzzleHttp\Psr7\Response;
 use Illuminate\Support\Facades\DB;
@@ -16,12 +17,25 @@ class Cartcontroller extends Controller
      */
     public function index()
     {
+        $user_id = Auth::guard('api')->user()->id;
         $cart =DB::table('Carts')
-                ->select('Carts.id as cart_id','Products.id', 'Products.name', 'Products.image_url','Products.price')
+                ->select('Carts.quantities','Products.price')
                 ->join('Products', 'Carts.product_id', '=', 'Products.id')
                 ->join('Users', 'Carts.user_id', '=', 'Users.id')
-                ->where('user_id', 1)->get();
-        return Response(['data' => $cart], 200);
+                ->where('user_id', $user_id)->get();
+        $total = 0;
+        foreach ($cart as $item) {
+                $total=$item->quantities*(int)$item->price;
+                }
+        $time = now()->toDateString();
+        $order = new Orders();
+        $order->Customer_id = $user_id;
+        $order->id = 1;
+        $order->order_date = $time;
+        $order->total_amount = $total;
+        $order->payment_method = 'cash';
+        $order->save();
+        return Response(['data' => $order], 200);
     }
 
     /**
@@ -46,7 +60,6 @@ class Cartcontroller extends Controller
      * Store a newly created resource in storage.
      */
     public function updateQuantities(Request $request,Carts $carts){
-        $user_id = Auth::guard('api')->user()->id;
         $input = $request->validate([
             'quantities' => 'required'
         ]);
