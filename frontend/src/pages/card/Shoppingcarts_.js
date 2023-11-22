@@ -1,28 +1,12 @@
 import React from "react";
-import useFetch from "../../hook/useFetch";
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
-import axios from "axios";
-import { useState, useEffect } from "react";
-import CartItem from "./CartItem";
+import Header from "../../layouts/Header";
+import Footer from "../../layouts/Footer";
+import CartItem from "../../components/cart/CartItem";
+import { useContext } from "react";
+import ShopContext from "../../context/ShopContext";
 
 function Shoppingcarts_() {
-  const [cartItems,setCartItems]= useState([]);
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          "http://127.0.0.1:8000/api/read/carts"
-        );
-        setCartItems(response.data.data);
-        console.log("shopping carts response.data", response.data);
-      } catch {
-        console.log("shopping carts error");
-      }
-    };
-    fetchData();
-  },[])
-
+  const { cartItems, setCartItems } = useContext(ShopContext);
   return (
     <>
       <Header></Header>
@@ -35,10 +19,10 @@ function Shoppingcarts_() {
                   <h5 className="mb-0">Cart - {cartItems.length} items</h5>
                 </div>
                 <div className="card-body">
-                {cartItems.map((item) => (
-                    <CartItem item={item} key={item.id}/>
+                  {cartItems.map((item) => (
+                    <CartItem item={item} key={item.id} />
                   ))}
-{/* row */}
+                  {/* row */}
                   <hr className="my-4" />
                 </div>
               </div>
