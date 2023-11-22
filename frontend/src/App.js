@@ -2,7 +2,7 @@ import Login from "./pages/Login/Login";
 import { Routes, Route } from "react-router-dom";
 import Homepage from "./pages/Home/Homepage";
 import Productdetail from "./pages/ProductDetail/Productdetail";
-import Shoppingcarts_ from "./pages/Card/Shoppingcarts_";
+import Shoppingcarts_ from "./pages/card/Shoppingcarts_";
 import Admin from "./pages/admin/Admin";
 import UserRoute from "./util/UserRoute";
 import AdminRoute from "./util/AdminRoute";

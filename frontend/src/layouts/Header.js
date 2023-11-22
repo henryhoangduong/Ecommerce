@@ -93,16 +93,10 @@ function Header() {
                   <span>Log out</span>
                 </Link>
               ) : (
+                <>
                 <Login></Login>
-              )}
-            </li>
-            <li>
-              {isLoggedIn ? (
-                <Link to={`/`} onClick={handleLogout} class="nav-link nav-icon">
-                  <span>Log out</span>
-                </Link>
-              ) : (
                 <ReactButton href="/register">Register</ReactButton>
+                </>
               )}
             </li>
           </ul>
