@@ -6,6 +6,8 @@ import { useAuth } from "../../context/AuthContext";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import { Navigate, useNavigate } from "react-router-dom";
+import ReactButton from "react-bootstrap/Button";
+import { Link } from "react-router-dom";
 
 function Login() {
   const nav = useNavigate();
@@ -44,6 +46,8 @@ function Login() {
       if (res?.data.role === "admin") {
         nav("/admin");
       }
+      else nav("/");
+
     } catch (error) {
       console.log(error);
     }
@@ -93,7 +97,12 @@ function Login() {
             </div>
           </form>
         </Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer className="justify-content-between">
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <p className="mb-0">Don't have an account? </p> 
+            <span>&nbsp;</span>
+            <Link to="/register">Sign up</Link>
+          </div>
           <Button variant="outline-primary" onClick={handlelogin}>
             Login
           </Button>

@@ -6,10 +6,16 @@ import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import Login from "../pages/Login/Login";
 import axios from "axios";
-import { Button } from "reactstrap";
-import ReactButton from "react-bootstrap/Button";
+import { Button, Offcanvas } from "react-bootstrap";
+import { useContext } from "react";
+import ShopContext from "../context/ShopContext"
 
 function Header() {
+ const {show,setShow,handleClose,handleShow} = useContext(ShopContext);
+
+
+
+
   const { authUser, setAuthUser, isLoggedIn, setIsLoggedIn } = useAuth();
   const nav = useNavigate();
 
@@ -66,24 +72,30 @@ function Header() {
         <nav class="header-nav ms-auto">
           <ul class="d-flex align-items-center">
             <li class="nav-item dropdown">
-              <Link
+              {/* <Link
                 class="nav-link nav-icon"
                 to="shoppingcarts"
                 data-bs-toggle="dropdown"
               >
                 <i class="bi bi-cart"></i>
-              </Link>
+                <span class="badge badge-number rounded-pill bg-danger">4</span>
+              </Link> */}
+
+              
+                <i class="bi bi-cart nav-link nav-icon " onClick={handleShow}>
+                <span class="badge badge-number rounded-pill bg-danger">4</span>
+                </i>
+
+              <Offcanvas show={show} onHide={handleClose} placement="end" scroll={true}>
+                <Offcanvas.Header closeButton>
+                  <Offcanvas.Title>Cart</Offcanvas.Title>
+                </Offcanvas.Header>
+                <Offcanvas.Body>...</Offcanvas.Body>
+              </Offcanvas>
             </li>
             <li class="nav-item d-block d-lg-none">
               <a class="nav-link nav-icon search-bar-toggle ">
                 <i class="bi bi-search"></i>
-              </a>
-            </li>
-
-            <li class="nav-item dropdown">
-              <a class="nav-link nav-icon" data-bs-toggle="dropdown">
-                <i class="bi bi-bell"></i>
-                <span class="badge bg-primary badge-number">4</span>
               </a>
             </li>
 
@@ -94,8 +106,7 @@ function Header() {
                 </Link>
               ) : (
                 <>
-                <Login></Login>
-                <ReactButton href="/register">Register</ReactButton>
+                  <Login></Login>
                 </>
               )}
             </li>

@@ -16,28 +16,26 @@ import { ShopContextProvider } from "./context/ShopContext";
 function App() {
   return (
     <div className="App">
-      <Routes>
-        <Route path="/" element={<Homepage></Homepage>}></Route>
-        <Route
-          path="/details/:id"
-          element={<Productdetail></Productdetail>}
-        ></Route>
-
-        <Route element={<UserRoute />}>
+      <ShopContextProvider>
+        <Routes>
+          <Route path="/" element={<Homepage></Homepage>}></Route>
           <Route
-            path="shoppingcarts"
-            element={
-              <ShopContextProvider>
-                <Shoppingcarts_></Shoppingcarts_>
-              </ShopContextProvider>
-            }
+            path="/details/:id"
+            element={<Productdetail></Productdetail>}
           ></Route>
-        </Route>
-        <Route path="register" element={<Register></Register>}></Route>
-        <Route element={<AdminRoute></AdminRoute>}>
-          <Route path="admin" element={<Admin></Admin>}></Route>
-        </Route>
-      </Routes>
+
+          <Route element={<UserRoute />}>
+            <Route
+              path="shoppingcarts"
+              element={<Shoppingcarts_></Shoppingcarts_>}
+            ></Route>
+          </Route>
+          <Route path="register" element={<Register></Register>}></Route>
+          <Route element={<AdminRoute></AdminRoute>}>
+            <Route path="admin" element={<Admin></Admin>}></Route>
+          </Route>
+        </Routes>
+      </ShopContextProvider>
     </div>
   );
 }

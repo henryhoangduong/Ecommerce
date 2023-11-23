@@ -20,8 +20,14 @@ export const ShopContextProvider = ({ children }) => {
     };
     fetchData();
   }, []);
+  //shopping cart offcanvas
+  const [show, setShow] = React.useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   return (
-    <ShopContext.Provider value={{ cartItems, setCartItems }}>
+    <ShopContext.Provider value={{ cartItems, setCartItems,show,setShow,handleClose,handleShow }}>
       {children}
     </ShopContext.Provider>
   );
