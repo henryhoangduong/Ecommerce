@@ -8,13 +8,11 @@ import Login from "../pages/Login/Login";
 import axios from "axios";
 import { Button, Offcanvas } from "react-bootstrap";
 import { useContext } from "react";
-import ShopContext from "../context/ShopContext"
+import ShopContext from "../context/ShopContext";
 
 function Header() {
- const {show,setShow,handleClose,handleShow} = useContext(ShopContext);
-
-
-
+  const { show, setShow, handleClose, handleShow, handleCartOffcanvas } =
+    useContext(ShopContext);
 
   const { authUser, setAuthUser, isLoggedIn, setIsLoggedIn } = useAuth();
   const nav = useNavigate();
@@ -81,16 +79,37 @@ function Header() {
                 <span class="badge badge-number rounded-pill bg-danger">4</span>
               </Link> */}
 
-              
-                <i class="bi bi-cart nav-link nav-icon " onClick={handleShow}>
+              <i class="bi bi-cart nav-link nav-icon " onClick={handleShow}>
                 <span class="badge badge-number rounded-pill bg-danger">4</span>
-                </i>
+              </i>
 
-              <Offcanvas show={show} onHide={handleClose} placement="end" scroll={true}>
+              <Offcanvas
+                show={show}
+                onHide={handleClose}
+                placement="end"
+                scroll={true}
+              >
                 <Offcanvas.Header closeButton>
                   <Offcanvas.Title>Cart</Offcanvas.Title>
                 </Offcanvas.Header>
-                <Offcanvas.Body>...</Offcanvas.Body>
+                <Offcanvas.Body>
+                  {isLoggedIn ? (
+                    <div className="container ">
+                      <div className="row">
+                        <button
+                          className="col-6 m-auto  btn btn-outline-primary"
+                          type="button"
+                          onClick={handleCartOffcanvas}
+                        >
+                          <i class="bi bi-cart"></i>
+                          go to Checkout
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    <p>Login to see what on your cart!</p>
+                  )}
+                </Offcanvas.Body>
               </Offcanvas>
             </li>
             <li class="nav-item d-block d-lg-none">

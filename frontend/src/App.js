@@ -25,6 +25,7 @@ function App() {
           ></Route>
 
           <Route element={<UserRoute />}>
+            <Route path="/" element={<Homepage></Homepage>}></Route>
             <Route
               path="shoppingcarts"
               element={<Shoppingcarts_></Shoppingcarts_>}

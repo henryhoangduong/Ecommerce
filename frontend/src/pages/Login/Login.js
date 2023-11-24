@@ -8,9 +8,13 @@ import Button from "react-bootstrap/Button";
 import { Navigate, useNavigate } from "react-router-dom";
 import ReactButton from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import ShopContext from "../../context/ShopContext";
 
 function Login() {
-  const nav = useNavigate();
+  const {setCartItems}= useContext(ShopContext);
+
+  const navigate = useNavigate();
   const { authUser, setAuthUser, isLoggedIn, setIsLoggedIn } = useAuth();
   const [user, setuser] = useState({ email: "", password: "" });
   const [show, setShow] = useState(false);
@@ -44,9 +48,23 @@ function Login() {
       handleClose();
       setIsLoggedIn(true);
       if (res?.data.role === "admin") {
-        nav("/admin");
+        navigate("/admin");
       }
-      else nav("/");
+      else {
+        const fetchData = async () => {
+          try {
+            const response = await axios.get(
+              "http://127.0.0.1:8000/api/read/carts"
+            );
+            setCartItems(response.data.data);
+            console.log("shopping carts response.data", response.data.data);
+          } catch {
+            console.log("ShopContext.js error");
+          }
+        };
+        fetchData();
+
+        navigate("/")};
 
     } catch (error) {
       console.log(error);
