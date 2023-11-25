@@ -4,9 +4,14 @@ import Footer from "../../layouts/Footer";
 import CartItem from "../../components/cart/CartItem";
 import { useContext } from "react";
 import ShopContext from "../../context/ShopContext";
+import axios from "axios";
 
 function Shoppingcarts_() {
   const { cartItems, setCartItems } = useContext(ShopContext);
+  const handleSubmit = async () =>{
+    const response = axios.get("")
+  }
+
   return (
     <>
       <Header></Header>
@@ -91,8 +96,9 @@ function Shoppingcarts_() {
                   <button
                     type="button"
                     className="btn btn-primary btn-lg btn-block"
+                    onClick={handleSubmit}
                   >
-                    Go to checkout
+                    Confirm order
                   </button>
                 </div>
               </div>

@@ -8,20 +8,23 @@ const ShopContext = createContext({});
 
 export const ShopContextProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          "http://127.0.0.1:8000/api/read/carts"
-        );
-        setCartItems(response.data.data);
-        console.log("shopping carts response.data", response.data.data);
-      } catch {
-        console.log("ShopContext.js error");
-      }
-    };
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await axios.get(
+  //         "http://127.0.0.1:8000/api/read/carts"
+  //       );
+  //       setCartItems(response.data.data);
+  //       console.log("shopping carts response.data", response.data.data);
+  //     } catch {
+  //       console.log("ShopContext.js error");
+  //     }
+  //   };
+  //   fetchData();
+  // }, []);
+  // useEffect(()=>{
+  //   console.log("ShopContext cartItems: ",cartItems,"cartItems.length: ",cartItems.length)
+  // },[])
   //shopping cart offcanvas
   const [show, setShow] = React.useState(false);
 

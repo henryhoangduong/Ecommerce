@@ -9,10 +9,21 @@ import axios from "axios";
 import { Button, Offcanvas } from "react-bootstrap";
 import { useContext } from "react";
 import ShopContext from "../context/ShopContext";
+import CartItem from "../components/cart/CartItem";
+// import { useEffect } from "react";
 
 function Header() {
-  const { show, setShow, handleClose, handleShow, handleCartOffcanvas } =
-    useContext(ShopContext);
+  const {
+    show,
+    setShow,
+    handleClose,
+    handleShow,
+    handleCartOffcanvas,
+    cartItems,
+    setCartItems,
+  } = useContext(ShopContext);
+
+
 
   const { authUser, setAuthUser, isLoggedIn, setIsLoggedIn } = useAuth();
   const nav = useNavigate();
@@ -70,44 +81,39 @@ function Header() {
         <nav class="header-nav ms-auto">
           <ul class="d-flex align-items-center">
             <li class="nav-item dropdown">
-              {/* <Link
-                class="nav-link nav-icon"
-                to="shoppingcarts"
-                data-bs-toggle="dropdown"
-              >
-                <i class="bi bi-cart"></i>
-                <span class="badge badge-number rounded-pill bg-danger">4</span>
-              </Link> */}
-
               <i class="bi bi-cart nav-link nav-icon " onClick={handleShow}>
-                <span class="badge badge-number rounded-pill bg-danger">4</span>
+                <span class="badge badge-number rounded-pill bg-danger">{cartItems.length===0 ? null : cartItems.length}</span>
               </i>
 
               <Offcanvas
                 show={show}
                 onHide={handleClose}
                 placement="end"
-                scroll={true}
               >
                 <Offcanvas.Header closeButton>
                   <Offcanvas.Title>Cart</Offcanvas.Title>
                 </Offcanvas.Header>
                 <Offcanvas.Body>
                   {isLoggedIn ? (
-                    <div className="container ">
-                      <div className="row">
-                        <button
-                          className="col-6 m-auto  btn btn-outline-primary"
-                          type="button"
-                          onClick={handleCartOffcanvas}
-                        >
-                          <i class="bi bi-cart"></i>
-                          go to Checkout
-                        </button>
+                    <>
+                      {cartItems.map((item) => (
+                        <CartItem item={item} key={item.id} />
+                      ))}
+                      <div className="container ">
+                        <div className="row">
+                          <button
+                            className="col-6 m-auto  btn btn-outline-primary"
+                            type="button"
+                            onClick={handleCartOffcanvas}
+                          >
+                            <i class="bi bi-cart"></i>
+                            go to Cart page
+                          </button>
+                        </div>
                       </div>
-                    </div>
+                    </>
                   ) : (
-                    <p>Login to see what on your cart!</p>
+                    <p><Login/> to see what in your cart!</p>
                   )}
                 </Offcanvas.Body>
               </Offcanvas>
