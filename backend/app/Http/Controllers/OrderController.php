@@ -35,7 +35,6 @@ class OrderController extends Controller
         $order->payment_method = 'cash';
         $order->total_amount = $total;
         $order->save();
-        
         return Response($order);
     }
     public function read(Request $request){
