@@ -21,6 +21,7 @@ function Header() {
     handleCartOffcanvas,
     cartItems,
     setCartItems,
+    currentUrl
   } = useContext(ShopContext);
 
 
@@ -80,7 +81,7 @@ function Header() {
 
         <nav class="header-nav ms-auto">
           <ul class="d-flex align-items-center">
-            <li class="nav-item dropdown">
+            {currentUrl === "/shoppingcarts" ? "" : (            <li class="nav-item dropdown">
               <i class="bi bi-cart nav-link nav-icon " onClick={handleShow}>
                 <span class="badge badge-number rounded-pill bg-danger">{cartItems.length===0 ? null : cartItems.length}</span>
               </i>
@@ -107,7 +108,7 @@ function Header() {
                             onClick={handleCartOffcanvas}
                           >
                             <i class="bi bi-cart"></i>
-                            go to Cart page
+                            go to checkout
                           </button>
                         </div>
                       </div>
@@ -117,7 +118,8 @@ function Header() {
                   )}
                 </Offcanvas.Body>
               </Offcanvas>
-            </li>
+            </li>)}
+
             <li class="nav-item d-block d-lg-none">
               <a class="nav-link nav-icon search-bar-toggle ">
                 <i class="bi bi-search"></i>

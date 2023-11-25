@@ -1,12 +1,17 @@
 import React from "react";
 import { createContext, useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useLocation } from "react-router-dom";
 
 
 const ShopContext = createContext({});
 
 export const ShopContextProvider = ({ children }) => {
+  //get url current page
+  const location = useLocation();
+  const currentUrl = location.pathname;
+  // console.log("GetUrlCurrentPage url: ", location.pathname);
+
   const [cartItems, setCartItems] = useState([]);
   // useEffect(() => {
   //   const fetchData = async () => {
@@ -31,15 +36,26 @@ export const ShopContextProvider = ({ children }) => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  // handle form submit button on Cart offcanvas 
+  // handle form submit button on Cart offcanvas
   const nav = useNavigate();
-  const handleCartOffcanvas= ()=> {
+  const handleCartOffcanvas = () => {
     handleClose();
     nav("/shoppingcarts");
-  }
-  
+  };
+
   return (
-    <ShopContext.Provider value={{ cartItems, setCartItems,show,setShow,handleClose,handleShow,handleCartOffcanvas }}>
+    <ShopContext.Provider
+      value={{
+        cartItems,
+        setCartItems,
+        show,
+        setShow,
+        handleClose,
+        handleShow,
+        handleCartOffcanvas,
+        currentUrl,
+      }}
+    >
       {children}
     </ShopContext.Provider>
   );
