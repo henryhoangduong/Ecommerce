@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import axios from "axios";
 import ProductContext from "./context/ProductContext";
 
-function Edit({product}) {
+function Edit({product,setData,data}) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -21,17 +21,27 @@ function Edit({product}) {
   const handleSave = async (event) => {
     try {
       event.preventDefault();
-      console.log("admin Edit.js handleSave", edit);
-      const handleClose = () => setShow(false);
-      setEdit({
-        name: "",
-        description: "",
-        price: "",
-        category_id: "",
-        brand: "",
-        image_URL: "",
-      });
-    } catch {}
+      const response = await axios.post(`http://127.0.0.1:8000/api/update/products/${edit.id}`,edit);
+      console.log("admin Edit.js handleSave: ", response.data.message,"url: ",`http://127.0.0.1:8000/api/update/products/${edit.id}`);
+      setEdit(edit => (response.data.message));
+      console.log("admin Edit.js handleSave after setEdit: ", edit);
+
+        // update data with edit
+        const dataObject = data.reduce((obj, item) => {
+          obj[item.id] = item;
+          return obj;
+        }, {});
+        dataObject[edit.id]=edit;
+        const updateProduct = Object.values(dataObject);
+      // console.log("admin Edit.js handleSave  dataObject: ", Object.values(dataObject));
+      //
+        
+      setData(updateProduct);
+      handleClose();
+
+    } catch {
+      console.log("admin edit error")
+    }
   };
 
   const handleDelete = async (event) => {
@@ -77,7 +87,7 @@ function Edit({product}) {
               </label>
               <div class="col-sm-8">
                 <input
-                  value={edit.Category_id}
+                  value={edit.category_id}
                   name="category_id"
                   onChange={(e) => handleChange(e)}
                   type=""
@@ -105,8 +115,8 @@ function Edit({product}) {
               </label>
               <div class="col-sm-8">
                 <input
-                  value={edit.image_URL}
-                  name="image_URL"
+                  value={edit.image_url}
+                  name="image_url"
                   onChange={(e) => handleChange(e)}
                   type=""
                   class="form-control"

@@ -24,8 +24,8 @@ class UserController extends Controller
      */
     public function login(Request $request){
         $input = $request->all();
-         Auth::attempt($input);
-         $user = Auth::user();
+        Auth::attempt($input);
+        $user = Auth::user();
         $role = 'admin';
         if ($user->role==0) {
             $role = 'user';
@@ -52,15 +52,15 @@ class UserController extends Controller
             'phone' => 'required',
             'address' => 'required'
         ]);
-    $user = new User;
-    $user->name = $input['name'];
-    $user->email = $input['email'];
-    $user->password = bcrypt($input['password']); // Hash the password for security
-    $user->phone = $input['phone'];
-    $user->address = $input['address'];
+        $user = new User;
+        $user->name = $input['name'];
+        $user->email = $input['email'];
+        $user->password = bcrypt($input['password']); // Hash the password for security
+        $user->phone = $input['phone'];
+        $user->address = $input['address'];
 
-    // Save the user to the database
-    $user->save();
-    return Response(['message'=> $user],200);
+        // Save the user to the database
+        $user->save();
+        return Response(['message'=> $user],200);
     }
 }
