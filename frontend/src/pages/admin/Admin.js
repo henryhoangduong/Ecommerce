@@ -4,23 +4,15 @@ import Salescard from "../../components/Salescard";
 import Sidebar from "../../layouts/Sidebar";
 import Header from "../../layouts/Header";
 import Button from "react-bootstrap/Button";
-import useFetch from "../../hook/useFetch";
-import React, { useEffect } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import Edit from "./Edit";
 import Customercard from "../../components/Customercard";
+import ProductContext from "./context/ProductContext";
 
 import "./Admin.css";
 function Admin() {
-  const { loading, error, data } = useFetch(
-    "http://127.0.0.1:8000/api/read/products/pagination?page=1"
-  );
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
-  if (loading) return <p>loading</p>;
-
-  if (error) return <p>error</p>;
+  const  {data}= useContext(ProductContext);
   return (
     <div>
       <Header></Header>
@@ -68,7 +60,7 @@ function Admin() {
                     <td>${product.price}</td>
                     <td class="fw-bold">10</td>
                     <td>
-                      <Edit></Edit>
+                      <Edit product={product}></Edit>
                     </td>
                   </tr>
                 ))}
