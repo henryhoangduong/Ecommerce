@@ -43,9 +43,6 @@ class ProductController extends Controller
                 'brand' => 'required',
                 'image_url' => 'required',
             ]);
-            // (int) $request->get('id');
-            // (float) $request->get('price');
-            // (int) $request->get('theme_id');
             Product::create($request->all());
             return Response(['message' => 'successful'], 200);
         }else{
@@ -53,36 +50,13 @@ class ProductController extends Controller
         }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {//
-    }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Product $product)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Product $product)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Product $product)
     {
-        $product->update($request->all());
-        return response(['message'=> $product],200);
+        $data = $request->all();
+        $product->update($data);
+        return Response(['message'=>$product],200);
     }
 
     /**

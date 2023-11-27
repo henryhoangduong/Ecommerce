@@ -3,7 +3,7 @@ import './RevenueCard.css'
 
 function RevenueCard() {
   return (
-                <div id='RevenueCard' class="dashboard col-xxl-4 col-md-6">
+                <div id='RevenueCard' class="dashboard col-xxl-3 col-md-6">
               <div class="card info-card revenue-card">
 
                 <div class="filter">
