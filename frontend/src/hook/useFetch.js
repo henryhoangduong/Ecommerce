@@ -13,10 +13,11 @@ const useFetch = (url) => {
       try {
         const res = await axios.get(url);
         const json = await res.data.data;
+
         setData(json);
         setLoading(false);
       } catch (error) {
-          console.log(error);
+        console.log(error);
         setError(error);
         setLoading(false);
       }
@@ -24,8 +25,10 @@ const useFetch = (url) => {
 
     fetchData();
   }, [url]);
-    useEffect(() => { console.log(data) },[data]);
-  return { loading, error, data };
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
+  return { loading, error, data, setData };
 };
 
 export default useFetch;

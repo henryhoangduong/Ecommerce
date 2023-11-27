@@ -6,9 +6,17 @@ import useFetch from "../../../hook/useFetch";
 const ProductContext = createContext({});
 
 export const ProductContextProvider = ({ children }) => {
-  const { loading, error, data } = useFetch(
+  //edit product causing rerender parent component
+
+
+
+
+
+  const { loading, error, data,setData } = useFetch(
     "http://127.0.0.1:8000/api/read/products/pagination?page=1"
   );
+
+
   useEffect(() => {
     console.log("ProductContext data",data);
   }, [data]);
@@ -20,8 +28,10 @@ export const ProductContextProvider = ({ children }) => {
     <ProductContext.Provider
       value={{
         data,
+        setData,
         loading,
         error,
+
       }}
     >
       {children}

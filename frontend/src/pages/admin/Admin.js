@@ -12,7 +12,7 @@ import ProductContext from "./context/ProductContext";
 
 import "./Admin.css";
 function Admin() {
-  const  {data}= useContext(ProductContext);
+  const  {data,setData}= useContext(ProductContext);
   return (
     <div>
       <Header></Header>
@@ -60,7 +60,7 @@ function Admin() {
                     <td>${product.price}</td>
                     <td class="fw-bold">10</td>
                     <td>
-                      <Edit product={product}></Edit>
+                      <Edit product={product} data={data} setData={setData}></Edit>
                     </td>
                   </tr>
                 ))}

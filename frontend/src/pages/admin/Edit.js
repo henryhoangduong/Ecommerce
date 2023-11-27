@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import axios from "axios";
 import ProductContext from "./context/ProductContext";
 
-function Edit({product}) {
+function Edit({product,setData,data}) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -23,8 +23,20 @@ function Edit({product}) {
       event.preventDefault();
       const response = await axios.post(`http://127.0.0.1:8000/api/update/products/${edit.id}`,edit);
       console.log("admin Edit.js handleSave: ", response.data.message,"url: ",`http://127.0.0.1:8000/api/update/products/${edit.id}`);
-      setEdit(response.data.message);
-      
+      setEdit(edit => (response.data.message));
+      console.log("admin Edit.js handleSave after setEdit: ", edit);
+
+        // update data with edit
+        const dataObject = data.reduce((obj, item) => {
+          obj[item.id] = item;
+          return obj;
+        }, {});
+        dataObject[edit.id]=edit;
+        const updateProduct = Object.values(dataObject);
+      // console.log("admin Edit.js handleSave  dataObject: ", Object.values(dataObject));
+      //
+        
+      setData(updateProduct);
       handleClose();
 
     } catch {
