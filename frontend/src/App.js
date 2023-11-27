@@ -12,6 +12,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 // import "bootstrap/dist/js/bootstrap.min.js";
 import Register from "./pages/register/Register";
 import { ShopContextProvider } from "./context/ShopContext";
+import { ProductContextProvider } from "./pages/admin/context/ProductContext";
 
 function App() {
   return (
@@ -33,7 +34,7 @@ function App() {
           </Route>
           <Route path="register" element={<Register></Register>}></Route>
           <Route element={<AdminRoute></AdminRoute>}>
-            <Route path="admin" element={<Admin></Admin>}></Route>
+            <Route path="admin" element={<ProductContextProvider><Admin></Admin></ProductContextProvider>}></Route>
           </Route>
         </Routes>
       </ShopContextProvider>
