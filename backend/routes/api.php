@@ -23,7 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-//User controller
+/////////////////////////////User controller///////////////////////////////
 Route::post('login', [App\Http\Controllers\UserController::class, 'login']);
 
 
@@ -32,7 +32,7 @@ Route::controller(UserController::class)->group(function () {
 })->middleware('auth:api');
 Route::post('register',[App\Http\Controllers\UserController::class,'register']);
 
-//Product controller
+///////////////////////////////Product controller////////////////////////////
 Route::get('read/products/pagination', [App\Http\Controllers\ProductController::class,'pagination']);
 Route::get('read/products', [App\Http\Controllers\ProductController::class,'index']);
 Route::get('read/products/{product}', [App\Http\Controllers\ProductController::class,'readbyid']);
@@ -42,12 +42,13 @@ Route::controller(ProductController::class)->group(function () {
     Route::delete('delete/products{product}', [App\Http\Controllers\ProductController::class,'destroy']);
 })->middleware('auth:api');
 
-//Cart controller
+///////////////////////////////Cart controller////////////////////////////
 Route::get('read/carts',[App\Http\Controllers\Cartcontroller::class,'index'])->middleware('auth:api');
 Route::controller(Cartcontroller::class)->group(function () {
     Route::post('create/carts', 'index');
     Route::post('update/carts/{carts}', 'updateQuantities');
 })->middleware('auth:api');
 
-//Order controller
-Route::post('create/orders', [App\Http\Controllers\OrderController::class, 'index'])->middleware('auth:api');
+/////////////////////////////////Order controller////////////////////////////
+Route::get('create/orders', [App\Http\Controllers\OrderController::class, 'index'])->middleware('auth:api');
+Route::get('read/orders', [App\Http\Controllers\OrderController::class, 'read'])->middleware('auth:api');

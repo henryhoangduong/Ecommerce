@@ -2,30 +2,36 @@ import React, { useEffect, useState } from "react";
 import { Form, FormGroup, Label, Input, FormText } from "reactstrap";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../../context/AuthContext";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
-import { Navigate,useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
+import ReactButton from "react-bootstrap/Button";
+import { Link } from "react-router-dom";
+import { useContext } from "react";
+import ShopContext from "../../context/ShopContext";
 
 function Login() {
-  const nav = useNavigate();
+  const {setCartItems}= useContext(ShopContext);
+
+  const navigate = useNavigate();
   const { authUser, setAuthUser, isLoggedIn, setIsLoggedIn } = useAuth();
-  const [user, setuser] = useState({'email':'','password':''});
+  const [user, setuser] = useState({ email: "", password: "" });
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   useEffect(() => {
-    console.log(user)
-  },[user])
+    console.log(user);
+  }, [user]);
 
   function handlechange(event) {
     setuser((current) => ({
       ...current,
       [event.target.name]: event.target.value,
     }));
-    console.log("USERRRR:",user)
+    console.log("USERRRR:", user);
   }
 
   async function handlelogin(event) {
@@ -33,20 +39,36 @@ function Login() {
     const url = "http://127.0.0.1:8000/api/login";
     try {
       const res = await axios.post(url, user);
-      console.log(res)
-      localStorage.setItem('token', res.data.token);
+      console.log(res);
+      localStorage.setItem("token", res.data.token);
       axios.defaults.headers.common[
         "Authorization"
       ] = `Bearer ${res.data.token}`;
-      setAuthUser({ 'role': res.data.role })
+      setAuthUser({ role: res.data.role });
       handleClose();
-      setIsLoggedIn(true)
-      if (res?.data.role === 'admin') {
-        nav('/admin')
+      setIsLoggedIn(true);
+      if (res?.data.role === "admin") {
+        navigate("/admin");
       }
-      } catch (error) {
-        console.log(error)
-      }
+      else {
+        const fetchData = async () => {
+          try {
+            const response = await axios.get(
+              "http://127.0.0.1:8000/api/read/carts"
+            );
+            setCartItems(response.data.data);
+            console.log("shopping carts response.data", response.data.data);
+          } catch {
+            console.log("ShopContext.js error");
+          }
+        };
+        fetchData();
+
+        navigate("/")};
+
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
@@ -71,7 +93,7 @@ function Login() {
               </label>
               <div class="col-sm-8">
                 <input
-                  name='email'
+                  name="email"
                   onChange={handlechange}
                   type="email"
                   class="form-control"
@@ -84,7 +106,7 @@ function Login() {
               </label>
               <div class="col-sm-8">
                 <input
-                  name='password'
+                  name="password"
                   onChange={handlechange}
                   type="password"
                   class="form-control"
@@ -93,12 +115,18 @@ function Login() {
             </div>
           </form>
         </Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer className="justify-content-between">
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <p className="mb-0">Don't have an account? </p> 
+            <span>&nbsp;</span>
+            <Link to="/register">Sign up</Link>
+          </div>
           <Button variant="outline-primary" onClick={handlelogin}>
             Login
           </Button>
         </Modal.Footer>
       </Modal>
+
     </>
   );
 }

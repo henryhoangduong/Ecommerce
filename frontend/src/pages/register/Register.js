@@ -6,10 +6,9 @@ import { useRef, useState, useEffect } from "react";
 import axios from "axios";
 // assets
 import "./Register.css";
-import registerImage from "../asset/img/registerImage.jpg";
 import { TbSquareRoundedCheckFilled } from "react-icons/tb";
 
-import Login from "./Login";
+import Login from "../Login/Login";
 //validated user name/must start with lowercase or upper letter/, password /1 lowercase, 1 uppercase, 1 diggit/
 const USER_REGEX = /^[A-z ]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[0-9]).{5,24}$/;
@@ -189,11 +188,6 @@ const Register = () => {
             <div className="row">
               <div className="col-md-6 offset-md-3 col-xl-4 offset-xl-4">
                 <div className="card shadow">
-                  <img
-                    src={registerImage}
-                    className="card-img-top"
-                    style={{ "max-height": "800px" }}
-                  />
                   <div className="card-body">
                     <div className="card-title text-center my-0 ">
                       <p className="fs-3 fw-bold font-monospace ">
@@ -233,11 +227,11 @@ const Register = () => {
             <span></span>
           </div>
           <div
-            style={{ height: "100vh"}}
+            style={{ height: "100vh" }}
             className="container-fluid justify-content-center d-flex align-items-center  fs-6"
           >
-            <div className="row w-100 " >
-              <div className="col-lg-6 offset-lg-3" >
+            <div className="row w-100 ">
+              <div className="col-lg-6 offset-lg-3">
                 <div className="card shadow">
                   {/* //define what will hold the error when the error exist */}
                   <p
