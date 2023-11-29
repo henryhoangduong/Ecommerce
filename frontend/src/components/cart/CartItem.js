@@ -2,6 +2,7 @@ import React from "react";
 import Cart_Button_ChangeQuantity from "./Cart_Button_ChangeQuantity"
 import { useContext } from "react";
 import ShopContext from "../../context/ShopContext";
+import GetCurrentUrl from "../../utils/GetCurrentUrl";
 
 const CartItem = ({ item }) => {
   return (
@@ -48,14 +49,13 @@ const CartItem = ({ item }) => {
         </button>
       </div>
 
-      <div className="col-lg-4 col-md-6 mb-4 mb-lg-0">
-        <div className="d-flex mb-4" style={{ maxwidth: "300px" }}>
-          {}
-  <Cart_Button_ChangeQuantity/>
+      <div className="col-lg-3 col-sm-3 mb-4 mb-lg-0 w-auto" >
+        <div className="d-flex my-4 " >
+          <Cart_Button_ChangeQuantity productCart={item}/>
         </div>
 
         <p className="text-start text-md-center">
-          <strong>{item.price} vnd</strong>
+          <strong>{item.quantities*item.price} vnd</strong>
         </p>
       </div>
     </div>

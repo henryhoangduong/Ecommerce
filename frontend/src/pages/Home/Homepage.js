@@ -14,11 +14,13 @@ import Slider from "../../components/home/Slider";
 function Homepage() {
   return (
     <>
+      {/* SLIDER */}
       <div style={{marginTop:'50px',position:'relative'}}>
         <SnowEffect>
           <Slider/>
         </SnowEffect>
       </div>
+
       <div class="container">
         <div class="col">
           <Header class="row"></Header>

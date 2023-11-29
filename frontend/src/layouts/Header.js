@@ -11,7 +11,7 @@ import ShopContext from "../context/ShopContext";
 import CartItem from "../components/cart/CartItem";
 import Droplist from "../components/Dropdown";
 import CartOffcanvas from "../components/cart/CartOffcanvas"
-
+import GetCurrentUrl from "../utils/GetCurrentUrl";
 
 function Header() {
   const pathname = window.location.pathname;
@@ -23,7 +23,7 @@ function Header() {
     handleCartOffcanvas,
     cartItems,
     setCartItems,
-    currentUrl,
+
   } = useContext(ShopContext);
 
   const { authUser, setAuthUser, isLoggedIn, setIsLoggedIn } = useAuth();
@@ -80,7 +80,7 @@ function Header() {
 
         <nav class="header-nav ms-auto">
           <ul class="d-flex align-items-center">
-            {currentUrl === "/shoppingcarts" ? (
+            {GetCurrentUrl() === "/shoppingcarts" ? (
               ""
             ) : (
               <li class="nav-item dropdown">

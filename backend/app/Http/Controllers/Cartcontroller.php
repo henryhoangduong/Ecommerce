@@ -18,7 +18,7 @@ class Cartcontroller extends Controller
     {
         $user_id=Auth::guard('api')->user()->id;
         $cart =DB::table('Carts')
-                ->select('Carts.id as cart_id','Products.id', 'Products.name', 'Products.image_url','Products.price')
+                ->select('Carts.id as cart_id','Products.id', 'Products.name', 'Products.image_url','Products.price','Carts.quantities as quantities')
                 ->join('Products', 'Carts.product_id', '=', 'Products.id')
                 ->join('Users', 'Carts.user_id', '=', 'Users.id')
                 ->where('user_id', $user_id)->get();

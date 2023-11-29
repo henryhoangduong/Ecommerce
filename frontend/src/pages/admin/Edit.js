@@ -26,7 +26,7 @@ function Edit({product,setData,data}) {
       setEdit(edit => (response.data.message));
       console.log("admin Edit.js handleSave after setEdit: ", edit);
 
-        // update data with edit
+        // update data with edit algorigth
         const dataObject = data.reduce((obj, item) => {
           obj[item.id] = item;
           return obj;
