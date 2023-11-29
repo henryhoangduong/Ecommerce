@@ -7,16 +7,19 @@ import axios from "axios";
 import "./Homepage.css";
 import Pagination from "../../components/Pagination";
 import Footer from "../../layouts/Footer";
+import SnowEffect from "../../components/effect/SnowEffect"
 
 function Homepage() {
   return (
     <>
       <div class="bg-image">
+        <SnowEffect>
         <img
           src={
             "https://www.lego.com/cdn/cs/set/assets/blt1a803a41d03d2a9b/Holiday23-GroupedAssets-202311-Hero-Standard-Large-10326.jpg?fit=crop&format=webply&quality=80&width=1600&height=500&dpr=1.5"
           }
         />
+        </SnowEffect>
       </div>
       <div class="container">
         <div class="col">
