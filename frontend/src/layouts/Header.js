@@ -1,18 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import Login from "../pages/Login/Login";
 import axios from "axios";
-import { Button, Offcanvas } from "react-bootstrap";
+import {  Offcanvas } from "react-bootstrap";
 import { useContext } from "react";
 import ShopContext from "../context/ShopContext";
 import CartItem from "../components/cart/CartItem";
-// import { useEffect } from "react";
+import Droplist from "../components/Dropdown";
+
 
 function Header() {
+  const pathname = window.location.pathname;
   const {
     show,
     setShow,
@@ -59,7 +60,6 @@ function Header() {
               LEGO
             </span>
           </a>
-          <i class="bi bi-list toggle-sidebar-btn"></i>
         </div>
         <div class="search-bar">
           <form
@@ -81,44 +81,48 @@ function Header() {
 
         <nav class="header-nav ms-auto">
           <ul class="d-flex align-items-center">
-            {currentUrl === "/shoppingcarts" ? "" : (            <li class="nav-item dropdown">
-              <i class="bi bi-cart nav-link nav-icon " onClick={handleShow}>
-                <span class="badge badge-number rounded-pill bg-danger">{cartItems.length===0 ? null : cartItems.length}</span>
-              </i>
+            {currentUrl === "/shoppingcarts" ? (
+              ""
+            ) : (
+              <li class="nav-item dropdown">
+                <i class="bi bi-cart nav-link nav-icon " onClick={handleShow}>
+                  <span class="badge badge-number rounded-pill bg-danger">
+                    {cartItems.length === 0 ? null : cartItems.length}
+                  </span>
+                </i>
 
-              <Offcanvas
-                show={show}
-                onHide={handleClose}
-                placement="end"
-              >
-                <Offcanvas.Header closeButton>
-                  <Offcanvas.Title>Cart</Offcanvas.Title>
-                </Offcanvas.Header>
-                <Offcanvas.Body>
-                  {isLoggedIn ? (
-                    <>
-                      {cartItems.map((item) => (
-                        <CartItem item={item} key={item.id} />
-                      ))}
-                      <div className="container ">
-                        <div className="row">
-                          <button
-                            className="col-6 m-auto  btn btn-outline-primary"
-                            type="button"
-                            onClick={handleCartOffcanvas}
-                          >
-                            <i class="bi bi-cart"></i>
-                            go to checkout
-                          </button>
+                <Offcanvas show={show} onHide={handleClose} placement="end">
+                  <Offcanvas.Header closeButton>
+                    <Offcanvas.Title>Cart</Offcanvas.Title>
+                  </Offcanvas.Header>
+                  <Offcanvas.Body>
+                    {isLoggedIn ? (
+                      <>
+                        {cartItems.map((item) => (
+                          <CartItem item={item} key={item.id} />
+                        ))}
+                        <div className="container ">
+                          <div className="row">
+                            <button
+                              className="col-6 m-auto  btn btn-outline-primary"
+                              type="button"
+                              onClick={handleCartOffcanvas}
+                            >
+                              <i class="bi bi-cart"></i>
+                              go to checkout
+                            </button>
+                          </div>
                         </div>
-                      </div>
-                    </>
-                  ) : (
-                    <p><Login/> to see what in your cart!</p>
-                  )}
-                </Offcanvas.Body>
-              </Offcanvas>
-            </li>)}
+                      </>
+                    ) : (
+                      <p>
+                        <Login /> to see what in your cart!
+                      </p>
+                    )}
+                  </Offcanvas.Body>
+                </Offcanvas>
+              </li>
+            )}
 
             <li class="nav-item d-block d-lg-none">
               <a class="nav-link nav-icon search-bar-toggle ">
@@ -128,9 +132,9 @@ function Header() {
 
             <li>
               {isLoggedIn ? (
-                <Link to={`/`} onClick={handleLogout} class="nav-link nav-icon">
-                  <span>Log out</span>
-                </Link>
+                (pathname === "/profile" ?(<></> ): (<Droplist></Droplist>))
+
+                
               ) : (
                 <>
                   <Login></Login>
