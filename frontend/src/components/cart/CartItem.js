@@ -1,4 +1,7 @@
 import React from "react";
+import Cart_Button_ChangeQuantity from "./Cart_Button_ChangeQuantity"
+import { useContext } from "react";
+import ShopContext from "../../context/ShopContext";
 
 const CartItem = ({ item }) => {
   return (
@@ -47,24 +50,8 @@ const CartItem = ({ item }) => {
 
       <div className="col-lg-4 col-md-6 mb-4 mb-lg-0">
         <div className="d-flex mb-4" style={{ maxwidth: "300px" }}>
-          <button className="btn btn-primary px-3 me-2">
-            <i className="fas fa-minus"></i>
-          </button>
-
-          <div className="form-outline">
-            <input
-              id="form1"
-              min="0"
-              name="quantity"
-              value="1"
-              type="number"
-              className="form-control"
-            />
-          </div>
-
-          <button className="btn btn-primary px-3 ms-2">
-            <i className="fas fa-plus"></i>
-          </button>
+          {}
+  <Cart_Button_ChangeQuantity/>
         </div>
 
         <p className="text-start text-md-center">
