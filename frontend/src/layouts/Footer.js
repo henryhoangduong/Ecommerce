@@ -3,7 +3,7 @@ import './Footer.css'
 
 function Footer() {
   return (
-    <footer id='footer' class="m-0">
+    <footer id="footer" class="m-0">
       <div class="container p-4">
         <section class="mb-4">
           <a
@@ -64,8 +64,8 @@ function Footer() {
                 </p>
               </div>
 
-              <div  class="col-md-5 col-12">
-                <div id='email' class="form-outline form-white mb-4">
+              <div class="col-md-5 col-12">
+                <div id="email" class="form-outline form-white mb-4">
                   <input
                     type="email"
                     id="form5Example21"
@@ -103,22 +103,22 @@ function Footer() {
               <ul class="list-unstyled mb-0">
                 <li>
                   <a href="#!" class="text-white">
-                    Link 1
+                    About the LEGO group
                   </a>
                 </li>
                 <li>
                   <a href="#!" class="text-white">
-                    Link 2
+                    LEGO® News
                   </a>
                 </li>
                 <li>
                   <a href="#!" class="text-white">
-                    Link 3
+                    Sustainability
                   </a>
                 </li>
                 <li>
                   <a href="#!" class="text-white">
-                    Link 4
+                    Lego Jobs
                   </a>
                 </li>
               </ul>
@@ -130,29 +130,29 @@ function Footer() {
               <ul class="list-unstyled mb-0">
                 <li>
                   <a href="#!" class="text-white">
-                    Link 1
+                    Contact us
                   </a>
                 </li>
                 <li>
                   <a href="#!" class="text-white">
-                    Link 2
+                    Find building instructions
                   </a>
                 </li>
                 <li>
                   <a href="#!" class="text-white">
-                    Link 3
+                    Replacement Parts
                   </a>
                 </li>
                 <li>
                   <a href="#!" class="text-white">
-                    Link 4
+                    Shipping and Returns
                   </a>
                 </li>
               </ul>
             </div>
 
             <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-              <h5 class="text-uppercase">Links</h5>
+              <h5 class="text-uppercase">Attraction</h5>
 
               <ul class="list-unstyled mb-0">
                 <li>
@@ -179,7 +179,7 @@ function Footer() {
             </div>
 
             <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-              <h5 class="text-uppercase">ABSTRACTION</h5>
+              <h5 class="text-uppercase">More from us</h5>
 
               <ul class="list-unstyled mb-0">
                 <li>

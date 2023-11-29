@@ -3,14 +3,15 @@ import Pagination from "../../components/Pagination";
 import Salescard from "../../components/Salescard";
 import Sidebar from "../../layouts/Sidebar";
 import Header from "../../layouts/Header";
-import Button from "react-bootstrap/Button";
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import Edit from "./Edit";
 import Customercard from "../../components/Customercard";
 import ProductContext from "./context/ProductContext";
-
 import "./Admin.css";
+import CreateProduct from "../../components/CreateProduct";
+
+
 function Admin() {
   const  {data}= useContext(ProductContext);
   return (
@@ -21,7 +22,7 @@ function Admin() {
         <RevenueCard></RevenueCard>
         <Customercard></Customercard>
       </div>
-
+      <CreateProduct></CreateProduct>
       <Sidebar></Sidebar>
       <div class="col-9" id="Producttable">
         <div class="card top-selling overflow-auto">
@@ -40,7 +41,7 @@ function Admin() {
                 {data.map((product) => (
                   <tr key={product.id}>
                     <th scope="row">
-                      <a href="#">
+                      <a href="">
                         <img
                           class="img-fluid"
                           style={{ width: "65px" }}
