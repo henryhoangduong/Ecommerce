@@ -4,12 +4,11 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import Login from "../pages/Login/Login";
+import Login from "../components/Login/Login";
 import axios from "axios";
-import { Button, Offcanvas } from "react-bootstrap";
 import { useContext } from "react";
 import ShopContext from "../context/ShopContext";
-import CartItem from "../components/cart/CartItem";
+import CartOffcanvas from "../components/cart/CartOffcanvas";
 // import { useEffect } from "react";
 
 function Header() {
@@ -21,10 +20,8 @@ function Header() {
     handleCartOffcanvas,
     cartItems,
     setCartItems,
-    currentUrl
+    currentUrl,
   } = useContext(ShopContext);
-
-
 
   const { authUser, setAuthUser, isLoggedIn, setIsLoggedIn } = useAuth();
   const nav = useNavigate();
@@ -81,44 +78,18 @@ function Header() {
 
         <nav class="header-nav ms-auto">
           <ul class="d-flex align-items-center">
-            {currentUrl === "/shoppingcarts" ? "" : (            <li class="nav-item dropdown">
-              <i class="bi bi-cart nav-link nav-icon " onClick={handleShow}>
-                <span class="badge badge-number rounded-pill bg-danger">{cartItems.length===0 ? null : cartItems.length}</span>
-              </i>
-
-              <Offcanvas
-                show={show}
-                onHide={handleClose}
-                placement="end"
-              >
-                <Offcanvas.Header closeButton>
-                  <Offcanvas.Title>Cart</Offcanvas.Title>
-                </Offcanvas.Header>
-                <Offcanvas.Body>
-                  {isLoggedIn ? (
-                    <>
-                      {cartItems.map((item) => (
-                        <CartItem item={item} key={item.id} />
-                      ))}
-                      <div className="container ">
-                        <div className="row">
-                          <button
-                            className="col-6 m-auto  btn btn-outline-primary"
-                            type="button"
-                            onClick={handleCartOffcanvas}
-                          >
-                            <i class="bi bi-cart"></i>
-                            go to checkout
-                          </button>
-                        </div>
-                      </div>
-                    </>
-                  ) : (
-                    <p><Login/> to see what in your cart!</p>
-                  )}
-                </Offcanvas.Body>
-              </Offcanvas>
-            </li>)}
+            {currentUrl === "/shoppingcarts" ? (
+              ""
+            ) : (
+              <li class="nav-item dropdown">
+                <i class="bi bi-cart nav-link nav-icon " onClick={handleShow}>
+                  <span class="badge badge-number rounded-pill bg-danger">
+                    {cartItems.length === 0 ? null : cartItems.length}
+                  </span>
+                </i>
+                <CartOffcanvas />
+              </li>
+            )}
 
             <li class="nav-item d-block d-lg-none">
               <a class="nav-link nav-icon search-bar-toggle ">
