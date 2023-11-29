@@ -8,7 +8,7 @@ import axios from "axios";
 import "./Register.css";
 import { TbSquareRoundedCheckFilled } from "react-icons/tb";
 
-import Login from "../Login/Login";
+import Login from "../../components/Login/Login";
 //validated user name/must start with lowercase or upper letter/, password /1 lowercase, 1 uppercase, 1 diggit/
 const USER_REGEX = /^[A-z ]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[0-9]).{5,24}$/;
