@@ -1,17 +1,20 @@
-import React, { useState } from "react";
+import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import Login from "../components/Login/Login";
 import axios from "axios";
+import {  Offcanvas } from "react-bootstrap";
 import { useContext } from "react";
 import ShopContext from "../context/ShopContext";
-import CartOffcanvas from "../components/cart/CartOffcanvas";
-// import { useEffect } from "react";
+import CartItem from "../components/cart/CartItem";
+import Droplist from "../components/Dropdown";
+import CartOffcanvas from "../components/cart/CartOffcanvas"
+
 
 function Header() {
+  const pathname = window.location.pathname;
   const {
     show,
     setShow,
@@ -56,7 +59,6 @@ function Header() {
               LEGO
             </span>
           </a>
-          <i class="bi bi-list toggle-sidebar-btn"></i>
         </div>
         <div class="search-bar">
           <form
@@ -99,9 +101,9 @@ function Header() {
 
             <li>
               {isLoggedIn ? (
-                <Link to={`/`} onClick={handleLogout} class="nav-link nav-icon">
-                  <span>Log out</span>
-                </Link>
+                (pathname === "/profile" ?(<></> ): (<Droplist></Droplist>))
+
+                
               ) : (
                 <>
                   <Login></Login>
