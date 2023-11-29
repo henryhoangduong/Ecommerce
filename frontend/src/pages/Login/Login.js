@@ -83,7 +83,7 @@ function Login() {
         keyboard={false}
       >
         <Modal.Header closeButton>
-          <Modal.Title>Login</Modal.Title>
+          <Modal.Title style={{fontWeight:'bold'}}>Sign In to your LEGO® Account</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <form>
@@ -117,7 +117,7 @@ function Login() {
         </Modal.Body>
         <Modal.Footer className="justify-content-between">
           <div style={{ display: "flex", alignItems: "center" }}>
-            <p className="mb-0">Don't have an account? </p> 
+            <p className="mb-0">Don't have an account? </p>
             <span>&nbsp;</span>
             <Link to="/register">Sign up</Link>
           </div>
@@ -126,7 +126,6 @@ function Login() {
           </Button>
         </Modal.Footer>
       </Modal>
-
     </>
   );
 }
