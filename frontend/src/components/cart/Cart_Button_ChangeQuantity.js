@@ -8,8 +8,7 @@ const Cart_Button_ChangeQuantity = ({ productCart }) => {
   const { cartItems, setCartItems } = useContext(ShopContext);
   const handleUpdateQuantity = async (quantities) => {
     try {
-      const url = `http://127.0.0.1:8000/api/update/carts/${productCart.id}`;
-      const response = await axios.post(url, {quantities});
+
 
       // cartUpdate algorigthm
       const cartUpdateObject = cartItems.reduce((obj, item) => {
@@ -20,6 +19,9 @@ const Cart_Button_ChangeQuantity = ({ productCart }) => {
 
       const cartUpdate = Object.values(cartUpdateObject);
       setCartItems(cartUpdate);
+
+      const url = `http://127.0.0.1:8000/api/update/carts/${productCart.id}`;
+      const response = await axios.post(url, {quantities});
     } catch (error) {
       console.log("Cart_Button_ChangeQuantity error");
     }
