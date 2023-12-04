@@ -26,9 +26,6 @@ const Cart_Button_AddToCart = ({ productId = undefined }) => {
 
   const handleAddToCart = async () => {
     try {
-      const url = "http://127.0.0.1:8000/api/create/carts";
-      // const response = await axios.post(url,[{product_id}]);
-
       //handle cartItems
       if (findCartByID()) {
         // cartItems have item
@@ -41,6 +38,8 @@ const Cart_Button_AddToCart = ({ productId = undefined }) => {
           "Cart_Button_AddToCart handleAddToCart else:",
           findCartByID()
         );
+        const url = "http://127.0.0.1:8000/api/create/carts";
+        // const response = await axios.post(url,[{product_id}]);
       }
     } catch (error) {
       console.log("there is something wrong, try again");

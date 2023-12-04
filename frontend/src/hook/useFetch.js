@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 const useFetch = (url) => {
-  const [data, setData] = useState(null);
+  const [productsList, setproductsList] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -14,7 +14,7 @@ const useFetch = (url) => {
         const res = await axios.get(url);
         const json = await res.data.data;
 
-        setData(json);
+        setproductsList(json);
         setLoading(false);
       } catch (error) {
         console.log(error);
@@ -26,9 +26,9 @@ const useFetch = (url) => {
     fetchData();
   }, [url]);
   useEffect(() => {
-    console.log(data);
-  }, [data]);
-  return { loading, error, data, setData };
+    console.log(productsList);
+  }, [productsList]);
+  return { loading, error, productsList, setproductsList };
 };
 
 export default useFetch;

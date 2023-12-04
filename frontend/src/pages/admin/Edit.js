@@ -2,9 +2,8 @@ import React, { useState, useContext } from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
-import ProductContext from "./context/ProductContext";
 
-function Edit({product,setData,data}) {
+function Edit({product,setproductsList,productsList}) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -27,7 +26,7 @@ function Edit({product,setData,data}) {
       console.log("admin Edit.js handleSave after setEdit: ", edit);
 
         // update data with edit algorigth
-        const dataObject = data.reduce((obj, item) => {
+        const dataObject = productsList.reduce((obj, item) => {
           obj[item.id] = item;
           return obj;
         }, {});
@@ -36,7 +35,7 @@ function Edit({product,setData,data}) {
       // console.log("admin Edit.js handleSave  dataObject: ", Object.values(dataObject));
       //
         
-      setData(updateProduct);
+      setproductsList(updateProduct);
       handleClose();
 
     } catch {
