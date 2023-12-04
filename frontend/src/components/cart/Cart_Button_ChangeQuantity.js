@@ -5,25 +5,7 @@ import axios from "axios";
 
 
 const Cart_Button_ChangeQuantity = ({ productCart }) => {
-  const { cartItems, setCartItems } = useContext(ShopContext);
-  const handleUpdateQuantity = async (quantities) => {
-    try {
-      const url = `http://127.0.0.1:8000/api/update/carts/${productCart.id}`;
-      const response = await axios.post(url, {quantities});
-
-      // cartUpdate algorigthm
-      const cartUpdateObject = cartItems.reduce((obj, item) => {
-        obj[item.id] = item;
-        return obj;
-      }, {});
-      cartUpdateObject[productCart.id] = { ...productCart, quantities };
-
-      const cartUpdate = Object.values(cartUpdateObject);
-      setCartItems(cartUpdate);
-    } catch (error) {
-      console.log("Cart_Button_ChangeQuantity error");
-    }
-  };
+  const { cartItems, setCartItems,handleUpdateQuantity } = useContext(ShopContext);
   const QuantitiesOption = [];
   for (let i=1; i<=10;i++){
     QuantitiesOption.push(i);
@@ -37,7 +19,7 @@ const Cart_Button_ChangeQuantity = ({ productCart }) => {
         name="quantities"
         className={"form-select"}
         id="quantities"
-        onChange={(e) => handleUpdateQuantity(e.target.value)}
+        onChange={(e) => handleUpdateQuantity(parseInt(e.target.value),productCart.id)}
         value={productCart.quantities}
       >
 

@@ -86,7 +86,7 @@ function Login() {
           <Modal.Title style={{fontWeight:'bold'}}>Sign In to your LEGO® Account</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <form>
+          <form id="loginForm" onSubmit={handlelogin}>
             <div class="row mb-3">
               <label for="inputEmail" class="col-sm-3 col-form-label">
                 Email
@@ -121,7 +121,7 @@ function Login() {
             <span>&nbsp;</span>
             <Link to="/register">Sign up</Link>
           </div>
-          <Button variant="outline-primary" onClick={handlelogin}>
+          <Button type="submit" form="loginForm" variant="outline-primary" >
             Login
           </Button>
         </Modal.Footer>

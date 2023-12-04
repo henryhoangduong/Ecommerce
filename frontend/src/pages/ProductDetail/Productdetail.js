@@ -5,6 +5,7 @@ import Header from "../../layouts/Header";
 import Button from "react-bootstrap/Button";
 import Footer from "../../layouts/Footer";
 import "./Productdetail.css";
+import Cart_Button_AddToCart  from "../../components/cart/Cart_Button_AddToCart.js";
 
 function Productdetail() {
   const { id } = useParams();
@@ -44,10 +45,7 @@ function Productdetail() {
                   value="1"
                   style={{ width: "3rem" }}
                 />
-                <Button id="addtocartbtn">
-                  <i class="bi-cart-fill me-1"></i>
-                  Add to cart
-                </Button>
+                <Cart_Button_AddToCart productId={id}/>
               </div>
             </div>
           </div>
