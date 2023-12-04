@@ -12,7 +12,7 @@ import { useContext } from "react";
 import ShopContext from "../../context/ShopContext";
 
 function Login() {
-  const {setCartItems}= useContext(ShopContext);
+  const { setCartItems } = useContext(ShopContext);
 
   const navigate = useNavigate();
   const { authUser, setAuthUser, isLoggedIn, setIsLoggedIn } = useAuth();
@@ -49,8 +49,7 @@ function Login() {
       setIsLoggedIn(true);
       if (res?.data.role === "admin") {
         navigate("/admin");
-      }
-      else {
+      } else {
         const fetchData = async () => {
           try {
             const response = await axios.get(
@@ -64,8 +63,8 @@ function Login() {
         };
         fetchData();
 
-        navigate("/")};
-
+        // navigate("/");
+      }
     } catch (error) {
       console.log(error);
     }
@@ -76,6 +75,7 @@ function Login() {
       <Button variant="outline-primary" onClick={handleShow}>
         Login
       </Button>
+
       <Modal
         show={show}
         onHide={handleClose}
@@ -83,7 +83,9 @@ function Login() {
         keyboard={false}
       >
         <Modal.Header closeButton>
-          <Modal.Title style={{fontWeight:'bold'}}>Sign In to your LEGO® Account</Modal.Title>
+          <Modal.Title style={{ fontWeight: "bold" }}>
+            Sign In to your LEGO® Account
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <form id="loginForm" onSubmit={handlelogin}>
@@ -121,7 +123,7 @@ function Login() {
             <span>&nbsp;</span>
             <Link to="/register">Sign up</Link>
           </div>
-          <Button type="submit" form="loginForm" variant="outline-primary" >
+          <Button type="submit" form="loginForm" variant="outline-primary">
             Login
           </Button>
         </Modal.Footer>

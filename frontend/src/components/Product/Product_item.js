@@ -12,6 +12,7 @@ const Product_item = ({product}) => {
             />
             <div class="card-body">
               <h5 class="card-title">{product.name.substring(0, 70)}</h5>
+              <h5>price: {product.price}</h5>
               <p class="card-text">
                {product.description}
               </p>

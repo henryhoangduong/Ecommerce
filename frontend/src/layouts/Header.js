@@ -80,7 +80,7 @@ function Header() {
 
         <nav class="header-nav ms-auto">
           <ul class="d-flex align-items-center">
-            {GetCurrentUrl() === "/shoppingcarts" ? (
+            {(GetCurrentUrl() === "/shoppingcarts" || GetCurrentUrl() === "/admin")? (
               ""
             ) : (
               <li class="nav-item dropdown">

@@ -26,12 +26,12 @@ export const ShopContextProvider = ({ children }) => {
   const handleUpdateQuantity = async (quantities,productId) => {
     try {
       const url = `http://127.0.0.1:8000/api/update/carts/${productId}`;
-      console.log("ShopContext handleUpdateQuantity cartUpdate quantities: ",quantities)
+      // console.log("ShopContext handleUpdateQuantity cartUpdate quantities: ",quantities)
       const response = await axios.post(url, {quantities});
 
 
       const cartUpdate = cartItems.map((item)=>((item.id == productId)?{...item,quantities}: item))
-      console.log("ShopContext handleUpdateQuantity cartUpdate after: ",cartUpdate)
+      console.log("ShopContext handleUpdateQuantity cartItems: ",cartItems)
       setCartItems(cartUpdate);
     } catch (error) {
       console.log("Cart_Button_ChangeQuantity error");
