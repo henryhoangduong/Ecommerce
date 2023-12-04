@@ -6,6 +6,7 @@ import axios from "axios";
 
 const Cart_Button_ChangeQuantity = ({ productCart }) => {
   const { cartItems, setCartItems,handleUpdateQuantity } = useContext(ShopContext);
+
   const QuantitiesOption = [];
   for (let i=1; i<=10;i++){
     QuantitiesOption.push(i);
