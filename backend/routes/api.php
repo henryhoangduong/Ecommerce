@@ -45,7 +45,7 @@ Route::controller(ProductController::class)->group(function () {
 ///////////////////////////////Cart controller////////////////////////////
 Route::get('read/carts',[App\Http\Controllers\Cartcontroller::class,'index'])->middleware('auth:api');
 Route::controller(Cartcontroller::class)->group(function () {
-    Route::post('create/carts', 'index');
+    Route::post('create/carts', 'create');
     Route::post('update/carts/{carts}', 'updateQuantities');
 })->middleware('auth:api');
 

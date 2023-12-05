@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Carts;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use GuzzleHttp\Psr7\Response;
 use Illuminate\Support\Facades\DB;
@@ -35,12 +36,20 @@ class Cartcontroller extends Controller
             'product_id' => 'required',
 
         ]);
+        $product = Product::find($request->product_id);
         $cart=new Carts();
         $cart->product_id = $input['product_id'];
         $cart->quantities = 1;
         $cart->user_id = $user_id;
         $cart->save();
-        return Response(['cart' => $cart], 200);
+        $response = [
+            'cart_id' => $cart->id,
+            'id' => $product->id,
+            'image_url' => $product->image_url,
+            'quantitis' => 1
+        ];
+
+        return Response($response, 200);
     }
 
     /**
