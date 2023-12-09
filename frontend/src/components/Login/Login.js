@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Form, FormGroup, Label, Input, FormText } from "reactstrap";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useAuth } from "../../context/AuthContext";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
-import { Navigate, useNavigate } from "react-router-dom";
-import ReactButton from "react-bootstrap/Button";
+import {  useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import ShopContext from "../../context/ShopContext";
+import GoogleAuth from "../GoogleAuth";
 
 function Login() {
   const { setCartItems } = useContext(ShopContext);
@@ -123,6 +122,7 @@ function Login() {
             <span>&nbsp;</span>
             <Link to="/register">Sign up</Link>
           </div>
+          <GoogleAuth></GoogleAuth>
           <Button type="submit" form="loginForm" variant="outline-primary">
             Login
           </Button>
