@@ -43,18 +43,74 @@ function Productdetail() {
               <div class="fs-5 mb-5">
                 <span>${productsList.price}</span>
               </div>
-              <p class="lead">{productsList.description}</p>
+              <div>
+                <p class="lead">
+                  <strong>THÔNG TIN SẢN PHẨM:</strong>
+                  <br />
+                  <span>
+                    Xuất xứ: Thương hiệu LEGO Đan Mạch, sản xuất tại Trung Quốc.
+                  </span>
+                  <br />
+                  <span>Độ tuổi phù hợp: Từ 4 tuổi trở lên.</span>
+                  <br />
+                  <span>Số mảnh ghép: 790.</span>
+                  <br />
+                  <span>Kích thước hộp (cm): 36 x 26.2 x 18.</span>
+                  <br />
+                  <span>Chất liệu: Nhựa nguyên sinh, phủ sơn cao cấp</span>
+                </p>
+
+                <p>
+                  <strong>
+                    - Bộ Lắp Ráp Thùng Gạch Lớn Classic Sáng Tạo LEGO CLASSIC
+                    10698
+                  </strong>
+                  - Nằm trong bộ chủ đề LEGO Classic, LEGO Large Creative Brick
+                  Box LEGO 10698 gồm 790 chi tiết, dành cho trẻ trên 4 tuổi, là
+                  món đồ chơi thú vị và hấp dẫn.
+                </p>
+
+                <p>
+                  Trẻ có thể sử dụng các viên gạch đầy màu sắc, cùng với sự sáng
+                  tạo và tư duy để hoàn thành các ngôi nhà với kiểu dáng đa
+                  dạng, xe cần cẩu, xe gắn máy, chiếc máy chụp hình cổ điển, cô
+                  nàng gấu đáng yêu, ... hoặc bất kỳ mô hình gì tùy theo sở
+                  thích và khả năng.
+                </p>
+
+                <p>
+                  Đặc biệt, bộ sản phẩm gồm các chi tiết đôi mắt, cánh cửa, bánh
+                  xe, ... cho phép trẻ tạo nên các con vật, đồ vật ngộ nghĩnh,
+                  đáng yêu mà mình yêu thích. LEGO 10698 sẽ mang lại cho trẻ
+                  những phút giây vui chơi thú vị khi được tự mình tưởng tượng
+                  và mày mò lắp ghép, rèn luyện tính tỉ mỉ cũng như khơi gợi khả
+                  năng tư duy và sáng tạo ở từng trẻ.
+                </p>
+
+                <p>
+                  <em>
+                    <strong>Lưu ý:</strong> Hình ảnh và thông tin in trên bao bì
+                    sản phẩm có thể thay đổi tùy theo từng đợt nhập hàng. Sản
+                    phẩm có chi tiết nhỏ, không thích hợp cho trẻ dưới 3 tuổi.
+                  </em>
+                </p>
+
+                <p>
+                  Giá sản phẩm trên Tiki đã bao gồm thuế theo luật hiện hành.
+                  Bên cạnh đó, tuỳ vào loại sản phẩm, hình thức và địa chỉ giao
+                  hàng mà có thể phát sinh thêm chi phí khác như phí vận chuyển,
+                  phụ phí hàng cồng kềnh, thuế nhập khẩu (đối với đơn hàng giao
+                  từ nước ngoài có giá trị trên 1 triệu đồng).
+                </p>
+              </div>
+
               <div class="d-flex">
                 <select
                   name="quantities"
                   className={"form-select mx-3"}
-                  style={{"maxWidth":"80px"}}
+                  style={{ maxWidth: "80px" }}
                   id="quantities"
-                  onChange={(e) =>
-                    setQuantities(
-                      parseInt(e.target.value)
-                    )
-                  }
+                  onChange={(e) => setQuantities(parseInt(e.target.value))}
                   value={quantities}
                 >
                   {QuantitiesOption.map((num) =>
@@ -70,7 +126,7 @@ function Productdetail() {
                   )}
                 </select>
                 {}
-                <Cart_Button_AddToCart productId={id} quantities={quantities}/>
+                <Cart_Button_AddToCart productId={id} quantities={quantities} />
               </div>
             </div>
           </div>

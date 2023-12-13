@@ -8,7 +8,6 @@ import AdminRoute from "./util/AdminRoute";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./asset/style.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-// import "bootstrap/dist/js/bootstrap.min.js";
 import Register from "./pages/register/Register";
 import { ShopContextProvider } from "./context/ShopContext";
 import { ProductContextProvider } from "./context/ProductContext";

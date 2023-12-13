@@ -1,20 +1,20 @@
+import Customercard from "../../components/Customercard";
 import RevenueCard from "../../components/RevenueCard";
 import Pagination from "../../components/Pagination";
 import Salescard from "../../components/Salescard";
 import Sidebar from "../../layouts/Sidebar";
 import Header from "../../layouts/Header";
 import { Link } from "react-router-dom";
-import Edit from "./Edit";
-import Customercard from "../../components/Customercard";
+
 import React, { useContext } from "react";
 import ProductContext from "../../context/ProductContext";
 import "./Admin.css";
 import CreateProduct from "../../components/CreateProduct";
-
+import Edit from "./Edit";
 
 function Admin() {
-  const {productsList, setproductsList} = useContext(ProductContext);
-  console.log("Admin.js productsList: ",productsList);
+  const { productsList, setproductsList } = useContext(ProductContext);
+  console.log("Admin.js productsList: ", productsList);
   return (
     // <h1>this is admin.js</h1>
 
@@ -64,7 +64,11 @@ function Admin() {
                     <td>${product.price}</td>
                     <td class="fw-bold">10</td>
                     <td>
-                      <Edit product={product} productsList={productsList} setproductsList={setproductsList}></Edit>
+                      <Edit
+                        product={product}
+                        productsList={productsList}
+                        setproductsList={setproductsList}
+                      ></Edit>
                     </td>
                   </tr>
                 ))}
