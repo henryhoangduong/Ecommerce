@@ -34,12 +34,13 @@ class Cartcontroller extends Controller
         $user_id = Auth::guard('api')->user()->id;
         $input = $request->validate([
             'product_id' => 'required',
+            'quantities'=>'required'
 
         ]);
         $product = Product::find($request->product_id);
         $cart=new Carts();
         $cart->product_id = $input['product_id'];
-        $cart->quantities = 1;
+        $cart->quantities = $input['quantities'];
         $cart->user_id = $user_id;
         $cart->save();
         $response = [
@@ -65,5 +66,9 @@ class Cartcontroller extends Controller
     }
     public function handle_is_ordered(){
         
+    }
+    public function delete(Request $request,Product $product){
+        $product_id = $product->id;
+        Carts::where('product_id', $product_id)->delete();
     }
 }

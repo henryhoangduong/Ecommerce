@@ -47,6 +47,7 @@ Route::get('read/carts',[App\Http\Controllers\Cartcontroller::class,'index'])->m
 Route::controller(Cartcontroller::class)->group(function () {
     Route::post('create/carts', 'create');
     Route::post('update/carts/{carts}', 'updateQuantities');
+    Route::get('delete/carts/{product}', 'delete');
 })->middleware('auth:api');
 
 /////////////////////////////////Order controller////////////////////////////
