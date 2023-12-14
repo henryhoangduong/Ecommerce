@@ -47,7 +47,7 @@ class Cartcontroller extends Controller
             'cart_id' => $cart->id,
             'id' => $product->id,
             'image_url' => $product->image_url,
-            'quantitis' => 1
+            'quantities' => $input['quantities']
         ];
 
         return Response($response, 200);
