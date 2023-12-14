@@ -2,12 +2,11 @@ import React from "react";
 import { createContext, useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+import { useContext } from "react";
 
 const ShopContext = createContext({});
 
 export const ShopContextProvider = ({ children }) => {
-
 
   const [cartItems, setCartItems] = useState([]);
 
@@ -21,18 +20,24 @@ export const ShopContextProvider = ({ children }) => {
     handleClose();
     nav("/shoppingcarts");
   };
+  const findCartId = (productId) =>{
+    const {cart_id} = cartItems.find((item)=>item.id==productId);
+    return cart_id;
+  }
+
+
 
   //handle update quantity
   const handleUpdateQuantity = async (quantities,productId) => {
     try {
-      const url = `http://127.0.0.1:8000/api/update/carts/${productId}`;
+      const cart_id = findCartId(productId);
+      // console.log("ShopContext handleUpdateQuantity cart_id: ",cart_id,"cartItems: ",cartItems,"productId: ",productId);
+      const url = `http://127.0.0.1:8000/api/update/carts/${cart_id}`;
       // console.log("ShopContext handleUpdateQuantity cartUpdate quantities: ",quantities)
-      const response = await axios.post(url, {quantities});
-
-
-      const cartUpdate = cartItems.map((item)=>((item.id == productId)?{...item,quantities}: item))
-      console.log("ShopContext handleUpdateQuantity cartItems: ",cartItems)
+      const cartUpdate = cartItems.map((item)=>((item.id == productId)?{...item,quantities}: item));
       setCartItems(cartUpdate);
+      // console.log("ShopContext handleUpdateQuantity cartItems: ",cartItems)
+      const response = await axios.post(url, {quantities,product_id:productId});
     } catch (error) {
       console.log("Cart_Button_ChangeQuantity error");
     }
@@ -48,7 +53,8 @@ export const ShopContextProvider = ({ children }) => {
         handleClose,
         handleShow,
         handleCartOffcanvas,
-        handleUpdateQuantity
+        handleUpdateQuantity,
+        findCartId
       }}
     >
       {children}
