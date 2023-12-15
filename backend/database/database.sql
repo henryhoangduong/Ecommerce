@@ -1,4 +1,4 @@
-use ecommerce;
+create database ecommerce;
 CREATE TABLE Users (
     id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	name varchar(255),
@@ -66,27 +66,3 @@ create table Carts(
     foreign key (user_id) references Users(id)
 );
 
-ALTER TABLE Carts
-ADD is_ordered boolean;
-
-Insert into Carts values (1,1,1,10);
-Insert into Carts values(2,1,2,10);
-
-SELECT
-    Carts.id AS cart_id,
-    Products.name,
-    Users.name,
-    quantities
-FROM
-    Carts
-JOIN
-    Products ON Carts.product_id = Products.id
-JOIN
-    Users ON Carts.user_id = Users.id
-WHERE
-    Carts.id = 1;
-
-/*Admin lấy lịch sử danh sách của order*/
-SELECT *
-FROM Orders
-ORDER BY order_date DESC;
