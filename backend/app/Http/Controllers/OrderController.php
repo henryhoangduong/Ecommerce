@@ -42,8 +42,8 @@ class OrderController extends Controller
         return Response($orders);
     }
     public function readbyuser(Request $request){
-        $user_id = Auth::guard('api')->user()->id;
-        $orders = Orders::where('user_id', $user_id)->all();
+        $customer_id = Auth::guard('api')->user()->id;
+        $orders = Orders::where('customer_id', $customer_id)->get();
         return Response($orders);
     }
 }

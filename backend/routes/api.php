@@ -52,4 +52,5 @@ Route::controller(Cartcontroller::class)->group(function () {
 
 /////////////////////////////////Order controller////////////////////////////
 Route::get('create/orders', [App\Http\Controllers\OrderController::class, 'index'])->middleware('auth:api');
-Route::get('read/orders', [App\Http\Controllers\OrderController::class, 'read'])->middleware('auth:api');
+Route::get('read/orders', [App\Http\Controllers\OrderController::class, 'read'])->middleware('auth:api');//admin
+Route::get('read/orders/user', [App\Http\Controllers\OrderController::class, 'readbyuser'])->middleware('auth:api');//user
