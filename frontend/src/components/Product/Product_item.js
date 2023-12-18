@@ -14,8 +14,7 @@ const Product_item = ({product}) => {
           <h5 class="card-title">{product.name.substring(0, 70)}</h5>
           <h5>Price: {product.price}</h5>
           <p class="card-text">
-            Lorem Ipsum has been the industry's standard dummy text ever since
-            the 1500s
+            LEGO DUPLO 10913 Thùng Gạch Duplo Sáng Tạo (65 Chi tiết)
           </p>
           <Link to={`details/${product.id}`} class="btn btn-primary">
             Detail

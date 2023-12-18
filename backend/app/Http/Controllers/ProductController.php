@@ -35,7 +35,7 @@ class ProductController extends Controller
     {
     if (Auth::guard('api')->user()->role === 1) {
             $request->validate([
-                'id' => 'required',
+                'id'=>'required',
                 'name' => 'required',
                 'description' => 'required',
                 'price' => 'required',

@@ -15,13 +15,17 @@ function Shoppingcarts_() {
   const handleSubmit = async (event) => {
     try {
       event.preventDefault();
-      const response = await axios.get(
-        "http://127.0.0.1:8000/api/create/orders"
+      console.log('waiting')
+      const response = await axios.post(
+        "https://test-drib.onrender.com/sendemailchatgpt",
+        {
+          email: "henryhoangduong@gmail.com",
+        }
       );
-      console.log("Shoppingcart_.js handleSubmit response :", response);
+      console.log('successful')
       setSuccess(true);
-    } catch {
-      console.log("Shoppingcart_.js handleSubmit response error");
+    } catch(error) {
+      console.log(error);
     }
   };
 
